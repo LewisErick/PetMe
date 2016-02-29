@@ -10,17 +10,17 @@
 ## Bugs to be fixed:
 
 Error in directory referencing for the following parts of the application:
--Adopt
--Events
--Quickstart
+- Adopt
+- Events
+- Quickstart
 
 ## Modifications to be applied:
--CSS Modifications to Post
--CSS Modifications to LogIn
--CSS Modifications to Profile
--Create preferences tab
+- CSS Modifications to Post
+- CSS Modifications to LogIn
+- CSS Modifications to Profile
+- Create preferences tab
 
 ## Implementations to be applied
--Node JS Server
--Express Application
--MongoDB
+- Node JS Server
+- Express Application
+- MongoDB
