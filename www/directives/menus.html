@@ -1,0 +1,20 @@
+<ion-side-menus>
+    <!-- Allows a side menu with the content of every link page -->
+    <ion-side-menu side="left">
+        <ion-list>
+            <ion-item ng-click="goto('home')">Inicio</ion-item>
+            <ion-item ng-click="goToProfile()">Perfil</ion-item>
+            <ion-item ng-click="goto('adopt')">Adopciones</ion-item>
+            <ion-item ng-click="goto('events')">Eventos</ion-item>
+            <ion-item ng-click="goToPreferences()">Preferencias</ion-item>
+            <ion-item ng-click="goToHelp()">Ayuda</ion-item>
+            <ion-item ng-click="goToLogIn()">Salir</ion-item>
+        </ion-list>
+    </ion-side-menu>
+
+    <!-- Adds a View and a Controller inside the Main Content of Home -->
+    <ion-side-menu-content>
+        <ng-transclude>
+        </ng-transclude>
+    </ion-side-menu-content>
+</ion-side-menus>

@@ -1,0 +1,42 @@
+[
+    {
+        "id": 0,
+        "pet": 
+        {
+            "id": 0,
+            "ownerOrganization": 0,
+            "pet": "dog",
+            "breed": "cocker spaniel",
+            "age": 4
+        },
+        "pictures": ["pet1_0.png", "pet1_1.png"],
+        "hashtags": ["#A0", "#B0"]
+    },
+    {
+        "id": 1,
+        "pet": 
+        {
+            "id": 1,
+            "ownerUser": 1,
+            "name": "Fido",
+            "pet": "dog",
+            "breed": "bulldog",
+            "age": 2
+        },
+        "pictures": ["pet3_0.png", "pet3_1.png"],
+        "hashtags": ["#A2", "#B2"]
+    },
+    {
+        "id": 2,
+        "pet": 
+        {
+            "id": 0,
+            "ownerOrganization": 0,
+            "pet": "dog",
+            "breed": "cocker spaniel",
+            "age": 4
+        },
+        "pictures": ["pet2_0.png", "pet2_1.png"],
+        "hashtags": ["#A1", "#B1"]
+    }
+]

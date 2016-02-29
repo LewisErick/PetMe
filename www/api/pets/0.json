@@ -1,0 +1,20 @@
+{
+	"id": 0,
+	"ownerOrganization": 0,
+	"pet": "dog",
+	"breed": "cocker spaniel",
+	"age": 4,
+    "questions": 
+    [
+        {
+            "id": 0,
+            "question": "¿Pregunta 1?",
+            "answer": "Respuesta 1"
+        },
+        {
+            "id": 1,
+            "question": "¿Pregunta 2?",
+            "answer": "Respuesta 2"
+        }
+    ]
+}

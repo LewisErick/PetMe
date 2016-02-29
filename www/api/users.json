@@ -1,0 +1,26 @@
+[
+    {
+        "id": 0,
+        "username": "JuanPerez",
+        "name": "Juan Perez",
+        "password": "asd",
+        "email": "juanperez@gmail.com",
+        "profilePicture": "usuario1.png"
+    },
+    {
+        "id": 1,
+        "username": "Uriel96",
+        "name": "Uriel Salazar de Urquidi",
+        "password": "qwerty",
+        "email": "usu.96@hotmail.com",
+        "profilePicture": "usuario2.png"
+    },
+    {
+        "id": 2,
+        "username": "ErickZul",
+        "name": "Erick Zul",
+        "password": "supercontraseña",
+        "email": "erickzul123@hotmail.com",
+        "profilePicture": "usuario3.png"
+    }
+]

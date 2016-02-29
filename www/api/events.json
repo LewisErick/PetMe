@@ -1,0 +1,79 @@
+[
+  {
+    "id": 0,
+    "organization": {
+      "organization": "DOS"
+    },
+    "title": "Evento 1",
+    "description": "Blablabla1",
+    "date": "02/02/2016",
+    "pictures": [ "img1.png", "img2.png" ],
+    "template": "<h1>Texto1</h1>"
+  },
+  {
+    "id": 1,
+    "organization": {
+      "organization": "UNO"
+    },
+    "title": "Evento 2",
+    "description": "Blablabla2",
+    "date": "03/02/2016",
+    "pictures": [ "img2.png", "img3.png" ],
+    "template": "<h1>Texto2</h1>"
+  },
+  {
+    "id": 2,
+    "organization": {
+      "organization": "UNO"
+    },
+    "title": "Evento 3",
+    "description": "Blablabla3",
+    "date": "03/04/2016",
+    "pictures": [ "img4.png", "img5.png" ],
+    "template": "<h1>Texto3</h1>"
+  },
+  {
+    "id": 3,
+    "organization": {
+      "organization": "DOS"
+    },
+    "title": "Evento 4",
+    "description": "Blablabla4",
+    "date": "03/03/2016",
+    "pictures": [ "img5.png" ],
+    "template": "<h1>Texto4</h1>"
+  },
+  {
+    "id": 4,
+    "organization": {
+      "organization": "TRES"
+    },
+    "title": "Evento 5",
+    "description": "Blablabla5",
+    "date": "03/02/2017",
+    "pictures": [ "img6.png", "img7.png" ],
+    "template": "<h1>Texto5</h1>"
+  },
+  {
+    "id": 5,
+    "organization": {
+      "organization": "TRES"
+    },
+    "title": "Evento 6",
+    "description": "Blablabla6",
+    "date": "13/02/2016",
+    "pictures": [ "img7.png" ],
+    "template": "<h1>Texto6</h1>"
+  },
+  {
+    "id": 6,
+    "organization": {
+      "organization": "UNO"
+    },
+    "title": "Evento 7",
+    "description": "Blablabla7",
+    "date": "11/02/2016",
+    "pictures": [ "img8.png" ],
+    "template": "<h1>Texto7</h1>"
+  }
+]

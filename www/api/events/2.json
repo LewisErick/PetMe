@@ -1,0 +1,11 @@
+{
+  "id": 2,
+  "organization": {
+    "organization": "UNO"
+  },
+	"title": "Evento 3",
+	"description": "Blablabla3",
+	"date": "03/04/2016",
+	"pictures": ["img4.png", "img5.png"],
+	"template": "<h1>Texto3</h1>"
+}

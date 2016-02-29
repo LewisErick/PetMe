@@ -1,0 +1,32 @@
+<div class="list card">
+    
+    <!-- Main Information about the pet and the owner -->
+    <div class="item item-divider item-span-right">
+        <span>{{ adoptionPost.pet.association }}</span>
+        <p>{{ adoptionPost.pet.breed }}</p>
+    </div>
+    
+    <!-- Link to a specific Pet. {{ $index }} WILL BE REPLACED with real pet's id -->
+    <a class="item" ng-href="#/home/adopt/{{ $index }}">
+        <ion-slide-box>
+            <!-- Content of Images of the Pet -->
+            <ion-slide ng-repeat="img in adoptionPost.pictures" width="100%">
+                <div align="center" valign="center">
+                    <img class="imgPet" ng-src="{{ img }}" style="border-radius: 10px" alt="pet">
+                </div>
+            </ion-slide>
+        </ion-slide-box>
+    </a>
+    
+    <!-- List of Hashtags -->
+    <div class="item item-divider row">
+        <div class="col-md-4" ng-repeat="hashtag in adoptionPost.hashtags">
+            <p>{{ hashtag }}</p>
+        </div>
+    </div>
+    
+    <!-- Add more information to the card -->
+    <ng-transclude>
+    </ng-transclude>
+    
+</div>

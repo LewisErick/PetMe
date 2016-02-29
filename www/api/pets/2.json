@@ -1,0 +1,15 @@
+{
+	"id": 2,
+	"ownerOrganization": 2,
+	"pet": "dog",
+	"breed": "beagle",
+	"age": 1,
+    "questions": 
+    [
+        {
+            "id": 3,
+            "question": "¿Pregunta 4?",
+            "answer": "Respuesta 4"
+        }
+    ]
+}

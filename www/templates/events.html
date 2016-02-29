@@ -1,0 +1,25 @@
+<ion-view view-title="{{ constants.title }}">
+    
+    <!-- Search Bar -->
+    <div class="bar bar-subheader item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="{{ constants.search }}" ng-model="search">
+    </div>
+        
+    <!-- Scroll content with list of events -->
+    <ion-content class="has-header has-subheader" overflow-scroll="false">
+        
+        <ion-refresher on-refresh="doRefresh()" spinner="bubbles">
+        </ion-refresher>
+        
+        <div ng-repeat="event in events">
+            <event-item event="event">
+            </event-item>
+        </div>
+        
+        <ion-infinite-scroll on-infinite="loadMore()" distance="1%">
+        </ion-infinite-scroll>
+        
+    </ion-content>
+    
+</ion-view>

@@ -1,0 +1,10 @@
+<a class="item item-avatar" ng-click="goTo('event', { id: $index })">
+    <img ng-src="{{ event.img }}">
+    <h2>{{ event.title }}</h2>
+    <h3>{{ event.date }}</h3>
+    <p ng-if="event.description.length > maxCharacters">{{ event.description.substr(0, maxCharacters) }}...</p>
+    <p ng-if="event.description.length <= maxCharacters">{{ event.description }}</p>
+    
+    <ng-transclude>
+    </ng-transclude>
+</a>

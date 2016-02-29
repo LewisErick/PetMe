@@ -1,0 +1,46 @@
+[
+    {
+        "id": 0,
+        "ownerOrganization": 0,
+        "pet": "dog",
+        "breed": "cocker spaniel",
+        "age": 4
+    },
+    {
+        "id": 1,
+        "ownerUser": 1,
+        "name": "Fido",
+        "pet": "dog",
+        "breed": "bulldog",
+        "age": 2
+    },
+    {
+        "id": 2,
+        "ownerOrganization": 2,
+        "pet": "dog",
+        "breed": "beagle",
+        "age": 1
+    },
+    {
+        "id": 3,
+        "ownerOrganization": 1,
+        "pet": "cat",
+        "breed": "bengala",
+        "age": 3
+    },
+    {
+        "id": 4,
+        "ownerOrganization": 0,
+        "pet": "dog",
+        "breed": "husky",
+        "age": 6
+    },
+    {
+        "id": 5,
+        "ownerUser": 0,
+        "name": "Cloe",
+        "pet": "cat",
+        "breed": "persa",
+        "age": 4
+    },
+]

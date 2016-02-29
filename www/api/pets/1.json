@@ -1,0 +1,16 @@
+{
+	"id": 1,
+	"ownerUser": 1,
+	"name": "Fido",
+	"pet": "dog",
+	"breed": "bulldog",
+	"age": 2,
+    "questions": 
+    [
+        {
+            "id": 2,
+            "question": "¿Pregunta 3?",
+            "answer": "Respuesta 3"
+        }
+    ]
+}

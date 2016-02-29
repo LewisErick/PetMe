@@ -1,0 +1,18 @@
+
+<ion-header-bar class="bar-stable">
+            <button class="button button-clear" ng-click="goTo('home.events')"><i class="icon ion-ios7-arrow-left"></i>Atrás</button>
+            <h1 class="title">PetMe - Publicación</h1>
+    </ion-header-bar>
+<ion-view view-title="PetMe - Post">
+<ion-scroll zooming="true" direction="xy">
+	<ion-item style="padding: 0px;">
+		<home-pets hashtags="post.hashtags" img="post.img" info="post.inf" comments="post.comments" key="post.key" comments="post.comments"></home-pets>
+	</ion-item>
+	<div class="post-inf">
+		{{ post.inf }}
+	</div>
+	<ion-item ng-repeat="comment in post.comments">
+		<user-entry name="comment.user.username" text="comment.inf" img="comment.user.img"></user-entry>
+	</ion-item>
+</ion-scroll>
+</ion-view>

@@ -1,0 +1,11 @@
+<ion-view>
+<ion-header-bar class="bar-stable">
+            <h1 class="title">PetMe - {{ user.username }}</h1>
+    </ion-header-bar>
+<ion-content>
+	<user-entry name="user.username" txt="user.mun" img="user.img"></user-entry>
+	<ion-item ng-repeat="pet in user.pets">
+		<img ng-src="/img/pets/{{ pet.img }}">
+	</ion-item>
+</ion-content>
+</ion-view>

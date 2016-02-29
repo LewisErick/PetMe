@@ -1,0 +1,56 @@
+{
+    "spanish": {
+        "menu": {
+            "title": "Menú",
+            "home": "Inicio",
+            "profile": "Perfil",
+            "adoptions": "Adopciones",
+            "events": "Eventos",
+            "configuration": "Preferencias",
+            "help": "Ayuda",
+            "signout": "Salir"
+        },
+        "events": {
+            "title": "Eventos",
+            "search": "Busca un evento"
+        },
+        "event": {
+            "attend": "Asistir"
+        },
+        "adoptionPosts": {
+            "title": "Adopciones",
+            "search": "Buscar cachorros"
+        },
+        "adoptionPost": {
+            "question": "Haz una pregunta a la organización",
+            "adopt": "Adóptame"
+        }
+    },
+    "english": {
+        "menu": {
+            "title": "Menu",
+            "home": "Home",
+            "profile": "Profile",
+            "adoptions": "Adoptions",
+            "events": "Events",
+            "configuration": "Configuration",
+            "help": "Help",
+            "signout": "Sign Out"
+        },
+        "events": {
+            "title": "Events",
+            "search": "Search for an event"
+        },
+        "event": {
+            "attend": "Attend"
+        },
+        "adoptionPosts": {
+            "title": "Adoptions",
+            "search": "Search for a pet"
+        },
+        "adoptionPost": {
+            "question": "Ask a question to the organization",
+            "adopt": "Adopt Me"
+        }
+    }
+}
