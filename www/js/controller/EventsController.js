@@ -1,4 +1,4 @@
-app.controller('EventsController', function($scope, $rootScope, API, Language) {
+myApp.controller('EventsController', function($scope, $rootScope, API, Language) {
     $scope.search;
     $scope.maxCharacters = 100;
     //The max character to be shown in the description of the item

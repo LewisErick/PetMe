@@ -1,4 +1,4 @@
-app.controller('AdoptController', function($scope, $timeout, $state, $filter, $rootScope, $ionicLoading, API, Language) {
+myApp.controller('AdoptController', function($scope, $timeout, $state, $filter, $rootScope, $ionicLoading, API, Language) {
     $scope.search;
     
     Language.getConstants(function(data) {

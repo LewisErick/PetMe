@@ -1,4 +1,4 @@
-app.controller('EventController', function($scope, $stateParams, $rootScope, API) {
+myApp.controller('EventController', function($scope, $stateParams, $rootScope, API) {
     
     $scope.doRefresh = function(){
         //make a new request to the server of the data
