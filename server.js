@@ -51,10 +51,10 @@ app.get('/api/events?', function (req, res) {
 	var title = req.query.title;
     var data = [];
     if(title){
-        database.getEvents(database.getDatabase(), { title: title }, function(documents) {
+        database.getEvents(database.getDatabase(), function(documents) {
             data = documents;
             res.send(JSON.stringify(data));
-        });
+        }, { title: title });
     } else {
         database.getEvents(database.getDatabase(), function(documents) {
             data = documents;
@@ -65,17 +65,15 @@ app.get('/api/events?', function (req, res) {
 
 app.get('/api/events/:id', function (req, res) {
 	var data = []
-    database.getEvents(database.getDatabase(), { _id: req.params.id }, function(documents) {
-        data = documents[0];
-        res.send(JSON.stringify(data));
-    });
+    database.getEvents(database.getDatabase(), function(document) {
+        res.send(JSON.stringify(document));
+    }, { _id: req.params.id });
 });
 
 app.get('/api/users/:id', function (req, res) {
 	var data = []
-    database.getUsers(database.getDatabase(), { _id: req.params.id } , { password: 0, _id: 0 }, function(documents) {
-        data = documents[0];
-        res.send(JSON.stringify(data));
+    database.getUserByID(database.getDatabase(), +req.params.id, function(document) {
+        res.send(JSON.stringify(document));
     });
 });
 
@@ -97,15 +95,9 @@ app.get('/api/users?', function(req, res){
 });
 
 app.post('/api/login', function(req, res) {
-	var flag = true;
-	for(var i=0; i < users.length; i++){
-		if(users[i].username === req.body.username && users[i].password === req.body.password){
-			flag = false;
-			res.send(users[i]);
-			break;
-		}
-	}
-	if(flag) res.send(undefined);
+    database.validateUser(database.getDatabase(), req.body.username, req.body.password, function(document) {
+        res.send(JSON.stringify(document));
+    });
 });
 
 app.listen(8100, function () {

@@ -13,7 +13,6 @@ var url = 'mongodb://localhost:5400/petme_db';
 MongoClient.connect(url, function(err, db) {
     db_petme = db;
     console.log("Loaded database to local variable.");
-
     assert.equal(null, err);
     console.log("Connected correctly to server.");
 });
@@ -55,7 +54,7 @@ var getEvents_impl2 = function(db, query, callback) {
     });
 }
 
-exports.getEvents = function(db, query, callback) {
+exports.getEvents = function(db, callback, query) {
     if(arguments.length == 2) {
         return getEvents_impl1(db, callback);
     } else {
@@ -70,22 +69,25 @@ exports.getPosts = function(db, callback) {
 }
 
 exports.getPostByID = function(db, id, callback) {
-    db.collection('posts').find({ _id: id }).toArray(function(err, documents) {
-        var element = documents[0];
-        callback(element);
+    db.collection('posts').findOne({ _id: id }, function(err, document) {
+        callback(document);
     });
 }
 
 exports.getUserByID = function(db, id, callback) {
-    db.collection('users').find({ _id: id }).toArray(function(err, documents) {
-        var element = documents[0];
-        callback(element);
+    db.collection('users').findOne( { _id : id }, { _id : 0, password : 0 } , function(err, document) {
+        callback(document);
+    });
+}
+
+exports.validateUser = function(db, username, password, callback) {
+    db.collection('users').findOne( { username : username, password : password }, { password : 0 } , function(err, document) {
+        callback(document);
     });
 }
 
 exports.getCommentByID = function(db, id, callback) {
-    db.collection('comments').find({ _id: id }).toArray(function(err, documents) {
-        var element = documents[0];
-        callback(element);
+    db.collection('comments').findOne({ _id: id }, function(err, document) {
+        callback(document);
     });
 }
