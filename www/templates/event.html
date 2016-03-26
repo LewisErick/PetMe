@@ -1,12 +1,10 @@
 <ion-view view-title="Evento">
     <!-- Main Content of the Event -->
-    <ion-content overflow-scroll="false">
+    <ion-content class="has-header" overflow-scroll="false">
         
-        <ion-refresher on-refresh="doRefresh()" spinner="bubbles">
+        <ion-refresher on-refresh="$parent.doRefresh()" spinner="bubbles">
         </ion-refresher>
 
-        <ion-list>
-            
             <!-- Title & Image -->
             <div align="center" valign="center">
                 <h2>{{ event.title }}</h2>
@@ -15,7 +13,7 @@
                     <ion-slide-box>
                         <ion-slide ng-repeat="picture in event.pictures" width="100%">
                             <div align="center" valign="center">
-                                <img ng-src="{{ picture }}" style="border-radius: 10px" alt="evento">
+                                <img ng-src="img/{{ picture }}" style="border-radius: 10px;width:100%" alt="evento">
                             </div>
                         </ion-slide>
                     </ion-slide-box>
@@ -25,12 +23,36 @@
             <!-- Description -->
             <p>{{ event.description }}</p>
             
+            <br>
             <!-- Attend Button -->
             <div align="center" valign="center">
                 <button class="button button-assertive">Asistir</button>
+            </div>    
+        
+            <br>
+            <!-- Friends Tag -->
+            <div class="row">
+                <div align="center" class="col col-75">
+                    <h4>{{ constants.friends }}</h4>
+                </div>
+                <div class="col">
+                    <button class="button button-balanced">
+                        Invitar
+                    </button>
+                </div>
             </div>
-            
-        </ion-list>
+            <!-- List of Friends -->
+            <ion-list>
+                <ion-scroll id="ionScrollRegion" direction="x" overflow-scroll="false">
+                    <div id="overflowingContent">
+                        <ion-item class="item item-avatar itemhorizontal" href="#/home/profile/{{ user.username }}" ng-repeat="user in users">
+                            <img ng-src="img/{{ user.profilePicture }}"><img>
+                            <span>{{ user.username }}</span>
+                        </ion-item>
+                    </div>
+                </ion-scroll>
+            </ion-list>
+            <br>
     </ion-content>
     
 </ion-view>

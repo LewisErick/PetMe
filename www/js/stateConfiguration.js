@@ -1,71 +1,102 @@
-myApp.config( function($stateProvider, $urlRouterProvider) {
-
-	$stateProvider.state('login', {
+app.config(function($stateProvider, $urlRouterProvider) {
+    
+    $stateProvider.state('login', {
 		url: '/login',
 		templateUrl: 'templates/login.html',
-		controller: 'logInController'
+		controller: 'LogIn'
 	});
-
-	$stateProvider.state('home', {
-		url: '/',
-		templateUrl: 'templates/home.html',
-	});
-
+    //Provides the side menu and more information. Can't be accessed without a child view and controller
+    $stateProvider.state('home', {
+        url: '/home',
+        abstract: true,
+        templateUrl: 'templates/home.html',
+        controller: 'Home'
+    });
 	$stateProvider.state('home.dashboard', {
 		url: '/dashboard',
-		templateUrl: 'templates/dashboard.html',
-		controller: 'homeController'
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/dashboard.html',
+                controller: 'Dashboard'
+            }
+        }
 	});
 
-	$stateProvider.state('home.adopt', {
-        url: '/adopt',
-        parent: 'home',
-        templateUrl: 'templates/adopt.html',
-        controller: 'AdoptController'
-    })
-
-    $stateProvider.state('home.events', {
-        url: '/events',
-        parent: 'home',
-        templateUrl: 'templates/events.html',
-        controller: 'EventsController'
-    })
-
-    $stateProvider.state('petAdoption', {
-        url: '/petAdoption/:id',
-        params: { id: null},
-        cache: false,
-        templateUrl: 'templates/petAdoption.html',
-        controller: 'PetAdoptionController'
-    })
-    $stateProvider.state('event', {
-        url: '/event/:id',
-        params: {'id': null},
-        cache: false,
-        templateUrl: 'templates/event.html',
-        controller: 'EventController'
+    $stateProvider.state('home.post', {
+        url: '/posts/:id',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/post.html',
+                controller: 'Post'
+            }
+        }
     });
 
-	$stateProvider.state('home.profile', {
-		url: '/user/:id',
-		parent: 'home',
-		params: {'id': null},
-        cache: false,
-		templateUrl: 'templates/user.html',
-		controller: 'userController'
-	});
+    //Provides the page with the list of pets in adoption
+    $stateProvider.state('home.adoptions', {
+        url: '/adoptions',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/adoptions.html',
+                controller: 'Adoptions'
+            }
+        }
+    });
 
-	$stateProvider.state('post', {
-		url: '/post/:id',
-		templateUrl: 'templates/post.html',
-		controller: 'postController'
+    //Provdies the page with information about a specific pet in adoption
+    $stateProvider.state('home.adoption', {
+        url: '/adoptions/:id',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/adoption.html',
+                controller: 'Adoption'
+            }
+        }
+    });
+    //Provides the page with the list of events
+    $stateProvider.state('home.events', {
+        url: '/events',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/events.html',
+                controller: 'Events'
+            }
+        }
+    });
+    //Provides the page with information about a specific event
+    $stateProvider.state('home.event', {
+        url: '/events/:id',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/event.html',
+                controller: 'Event'
+            }
+        }
+    });
+	
+	$stateProvider.state('home.profile', {
+		url: '/profile/:username',
+        views: {
+            'menuContent': {
+                params: {'username': null},
+                templateUrl: 'templates/profile.html',
+                controller: 'Profile'
+            }
+        }
 	});
 
 	$stateProvider.state('photo', {
 		url: '/photo',
 		templateUrl: 'templates/photo.html',
-		controller: 'photoController'
+		controller: 'Photo'
 	});
-
-	$urlRouterProvider.otherwise('/login');
+	
+    $stateProvider.state('firstSteps', {
+        url: '/firstSteps',
+        templateUrl: 'templates/firstSteps.html',
+    });
+    
+    //Default page to be loaded
+    $urlRouterProvider.otherwise('/login');
+    
 });

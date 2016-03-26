@@ -1,0 +1,60 @@
+<ion-view view-title="{{ constants.title }}">
+
+	<ion-content class="has-header has-subheader" overflow-scroll="false">
+		<div class="list">
+		  <label class="item item-input item-floating-label">
+		    <span class="input-label">Nombre</span>
+		    <input type="text" required ng-minlength="3" ng-maxlength="40" ng-model="name">
+		  </label>
+		  <label class="item item-input item-floating-label">
+		    <span class="input-label">Apellido</span>
+		    <input type="text" required ng-minlength="3" ng-maxlength="40" ng-model="last">
+		  </label>
+		  <label class="item item-input item-floating-label">
+		    <span class="input-label">Edad</span>
+		    <input type="number" min="18" max="99" required ng-model="age">
+		  </label>
+		  <label class="item item-input item-select">
+		    <div class="input-label">
+		      Estado Civil
+		    </div>
+		    <select required ng-model="marital">
+		      <option selected>Soltero</option>
+		      <option>Casado</option>
+		    </select>
+		  </label>
+		  <label class="item item-input">
+		    <span class="input-label">México</span>
+		  </label>
+		  <label class="item item-input">
+		    <span class="input-label">Nuevo León</span>
+		  </label>
+		  <label class="item item-input item-select">
+		    <div class="input-label">
+		      Municipio
+		    </div>
+		    <select required ng-model="municipality">
+		      <option selected>Monterrey</option>
+		      <div ng-model="mun_options" ng-repeat="mun in muns">
+		    	<option>{{mun}}</option>
+		      </div>
+		    </select>
+		  </label>
+		  <label class="item item-input item-floating-label">
+		    <span class="input-label">Teléfono de Casa</span>
+		    <input type="number" min="10" max="10" required ng-model="house_phone">
+		  </label>
+		  <label class="item item-input item-floating-label">
+		    <span class="input-label">Teléfono Celular</span>
+		    <input type="number" min="10" max="10" required ng-model="house_phone">
+		  </label>
+		  <label class="item item-input item-floating-label">
+		    <span class="input-label">Correo electrónico:</span>
+		    <input type="text" required ng-model="email">
+		  </label>
+		  <button class="button button-full button-positive">
+			  Registrarse
+			</button>
+		</div>
+	</ion-content>
+</ion-view>

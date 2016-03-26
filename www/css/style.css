@@ -1,4 +1,42 @@
-/* PetMe CSS */
+.slider {
+    height: 100%;
+}
+
+.slider-slide {
+    text-align: center;
+}
+
+#overflowingContent{
+  width: -webkit-max-content;
+  width: max-content;
+}
+
+.itemhorizontal{
+  display:block;
+  float:left;
+}
+
+.facebook-icon{
+    content: url('/img/facebook.png');
+    width: 42px;
+}
+
+.message-error {
+  line-height: 20px;
+  opacity: 1;
+  padding: 10px;
+}
+
+.message-error.ng-hide-add, .message-error.ng-hide-remove {
+  transition: all linear 0.5s;
+}
+
+.message-error.ng-hide {
+  line-height: 0;
+  opacity: 0;
+  padding: 0 0px;
+}
+
 .logo-space {
 	width: 100%;
 	height: 185px;

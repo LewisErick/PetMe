@@ -1,28 +1,60 @@
-<ion-header-bar class="bar-stable">
-  <h1 class="title">PetMe</h1>
-</ion-header-bar>
-<ion-view>
-<ion-side-menus>
-      <!-- Left menu -->
-      <ion-side-menu side="left">
-        <ion-content>
-            <ion-list can-swipe="listCanSwipe">
-                <ion-item ng-click="goTo('home.dashboard')">Inicio</ion-item>
-                <ion-item ng-click="goTo('home.profile', {'id': 0})">Perfil</ion-item>
-                <ion-item ng-click="goTo('home.adopt')">Adopciones</ion-item>
-                <ion-item ng-click="goTo('home.events')">Eventos</ion-item>
-                <ion-item ng-click="goTo('home.preferences')">Preferencias</ion-item>
-                <ion-item ng-click="goTo('home.help')">Ayuda</ion-item>
-                <ion-item ng-href="#/login">Salir</ion-item>
+<ion-side-menus enable-menu-with-back-views="false">
+    
+    <!-- Adds a View and a Controller inside the Main Content of Home -->
+    <ion-side-menu-content>
+        <!-- Header -->
+        <ion-nav-bar class="bar-stable">
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+                </button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        
+        <!-- Main Content of pages -->
+        <ion-nav-view name="menuContent">
+        </ion-nav-view>
+        
+    </ion-side-menu-content>
+    
+    <!-- Side Menu with the content of every link page -->
+    <ion-side-menu side="left">
+        
+        <!-- Side Menu Header -->
+        <ion-header-bar class="bar-stable">
+            <h1 class="title">
+                Menú
+            </h1>
+        </ion-header-bar>
+        
+        <!-- Links to other pages -->
+        <ion-content overflow-scroll="false">
+            <ion-list>
+                <ion-item menu-close href="#/home/dashboard">
+                    Inicio
+                </ion-item>
+                <ion-item menu-close ng-click="goToProfile()">
+                    Perfil
+                </ion-item>
+                <ion-item menu-close href="#/home/adoptions">
+                    Adopciones
+                </ion-item>
+                <ion-item menu-close href="#/home/events">
+                    Eventos
+                </ion-item>
+                <ion-item menu-close href="#/home/preferences">
+                    Preferencias
+                </ion-item>
+                <ion-item menu-close href="#/home/help">
+                    Ayuda
+                </ion-item>
+                <ion-item menu-close href="#/login">
+                    Salir
+                </ion-item>
             </ion-list>
         </ion-content>
-      </ion-side-menu>
-
-      <ion-side-menu-content>
-        <!-- Main content, usually <ion-nav-view> -->
-        <!-- Handles template display -->
-		    <div ui-view>
-        </div>
-	   </ion-side-menu-content>
+        
+    </ion-side-menu>
+    
 </ion-side-menus>
-</ion-view>

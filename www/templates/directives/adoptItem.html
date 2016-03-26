@@ -6,27 +6,24 @@
         <p>{{ adoptionPost.pet.breed }}</p>
     </div>
     
-    <!-- Link to a specific Pet. {{ $index }} WILL BE REPLACED with real pet's id -->
-    <a class="item" ng-href="#/home/adopt/{{ $index }}">
+    <a class="item" ng-href="#/home/adoptions/{{ adoptionPost.id }}">
+        <img ng-show="adoptionPost.pet.gender=='Female'" src="img/female.png" style="position: absolute;z-index: 2; width: 32px; right: 10px">
+        <img ng-show="adoptionPost.pet.gender=='Male'" src="img/male.png" style="position: absolute;z-index: 2; width: 32px; right: 10px">
         <ion-slide-box>
             <!-- Content of Images of the Pet -->
             <ion-slide ng-repeat="img in adoptionPost.pictures" width="100%">
-                <div align="center" valign="center">
-                    <img class="imgPet" ng-src="{{ img }}" style="border-radius: 10px" alt="pet">
-                </div>
+                <img align="center" valign="center" class="imgPet" ng-src="img/{{ img }}" style="border-radius: 10px; max-height: 200px;max-width:100%" alt="pet">
             </ion-slide>
         </ion-slide-box>
     </a>
     
-    <!-- List of Hashtags -->
     <div class="item item-divider row">
-        <div class="col-md-4" ng-repeat="hashtag in adoptionPost.hashtags">
-            <p>{{ hashtag }}</p>
-        </div>
-    </div>
+        <!--<p>{{ adoptionPost.pet.ownerOrganization.organization }}</p>-->
     
-    <!-- Add more information to the card -->
-    <ng-transclude>
-    </ng-transclude>
+    
+        <!-- Add more information to the card -->
+        <ng-transclude>
+        </ng-transclude>
+    </div>
     
 </div>

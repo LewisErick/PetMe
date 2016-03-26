@@ -1,13 +1,46 @@
-<ion-view>
-	<ion-header-bar class="bar-stable">
-	        <h1 class="title">PetMe - Inicio</h1>
-	    </ion-header-bar>
-	
-    <ion-content class="has-header">
-	<ion-list>
-		<ion-item ng-repeat="post in getPosts()" style="padding: 0px;">
-			<home-pets hashtags="post.hashtags" img="post.img" info="post.inf" comments="post.comments" key="post.key" comments="post.comments"></home-pets>
-		</ion-item>
-	</ion-list>
-	</ion-content>
+<ion-view view-title="{{ constants.title }}">
+    
+    <!-- Search Bar -->
+    <!--<div class="bar bar-subheader item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="{{ constants.search }}" ng-model="search">
+    </div>-->
+    
+    <div class="tabs-striped tabs-top" ng-init="something=1">
+        <div class="tabs">
+            <a class="tab-item" ng-class="something==1 ? 'active' : ''" ng-click="something=1">
+                <i class="icon ion-home"></i>
+            </a>
+            <a class="tab-item" ng-class="something==2 ? 'active' : ''" ng-click="something=2">
+                <i class="icon ion-search"></i>
+            </a>
+            <a class="tab-item" ng-class="something==3 ? 'active' : ''" ng-click="something=3">
+                <i class="icon ion-compose"></i>
+            </a>
+        </div>
+    </div>
+    
+    <ion-content ng-show="something==1" class="has-header has-subheader" overflow-scroll="false">
+
+        <ion-refresher on-refresh="doRefresh()" spinner="bubbles">
+        </ion-refresher>
+
+        <ion-list>
+            <ion-item ng-repeat="post in posts">
+                <home-pets post="post"></home-pets>
+            </ion-item>
+        </ion-list>
+
+        <ion-infinite-scroll on-infinite="loadMore()" distance="1%">
+        </ion-infinite-scroll>
+    </ion-content>
+    
+    <ion-content ng-show="something==2" class="has-header has-subheader" overflow-scroll="false">
+        <div class="bar item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="{{ constants.search }}" ng-model="search">
+        </div>
+    </ion-content>
+    
+    
 </ion-view>

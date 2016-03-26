@@ -6,6 +6,13 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+
+app.use(express.static(__dirname + '/www'));
 
 var paths = {
   sass: ['./scss/**/*.scss']

@@ -1,5 +1,14 @@
 {
     "spanish": {
+        "login": {
+            "title": "Inicio Sesión",
+            "userfield": "Usuario",
+            "passwordfield": "Contraseña",
+            "errormessage": "Usuario o Contraseña Invalida",
+            "signin": "Iniciar Sesión",
+            "facebooksignin": "Facebook",
+            "register": "¡Regístrate ya!"
+        },
         "menu": {
             "title": "Menú",
             "home": "Inicio",
@@ -12,10 +21,12 @@
         },
         "events": {
             "title": "Eventos",
-            "search": "Busca un evento"
+            "search": "Busca un evento",
+            "maxCharacters": 100
         },
         "event": {
-            "attend": "Asistir"
+            "attend": "Asistir",
+            "friends": "Linea de Amigos"
         },
         "adoptionPosts": {
             "title": "Adopciones",
@@ -24,33 +35,6 @@
         "adoptionPost": {
             "question": "Haz una pregunta a la organización",
             "adopt": "Adóptame"
-        }
-    },
-    "english": {
-        "menu": {
-            "title": "Menu",
-            "home": "Home",
-            "profile": "Profile",
-            "adoptions": "Adoptions",
-            "events": "Events",
-            "configuration": "Configuration",
-            "help": "Help",
-            "signout": "Sign Out"
-        },
-        "events": {
-            "title": "Events",
-            "search": "Search for an event"
-        },
-        "event": {
-            "attend": "Attend"
-        },
-        "adoptionPosts": {
-            "title": "Adoptions",
-            "search": "Search for a pet"
-        },
-        "adoptionPost": {
-            "question": "Ask a question to the organization",
-            "adopt": "Adopt Me"
         }
     }
 }

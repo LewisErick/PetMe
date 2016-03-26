@@ -4,7 +4,10 @@
         "pet": 
         {
             "id": 0,
-            "ownerOrganization": 0,
+            "ownerOrganization": {
+                "id": 0,
+                "organization": "UNO"
+            },
             "pet": "dog",
             "breed": "cocker spaniel",
             "age": 4
@@ -17,7 +20,10 @@
         "pet": 
         {
             "id": 1,
-            "ownerUser": 1,
+            "ownerOrganization": {
+                "id": 1,
+                "organization": "DOS"
+            },
             "name": "Fido",
             "pet": "dog",
             "breed": "bulldog",
@@ -31,7 +37,10 @@
         "pet": 
         {
             "id": 0,
-            "ownerOrganization": 0,
+            "ownerOrganization": {
+                "id": 0,
+                "organization": "UNO"
+            },
             "pet": "dog",
             "breed": "cocker spaniel",
             "age": 4

@@ -1,0 +1,22 @@
+<div class="home-frame">
+    User: {{ post.user }}<br>
+    Post ID: {{ post._id }}<br>
+    <a ng-href="#/home/posts/{{ post._id }}">
+    <div align="center">
+        <img ng-src="img/{{post.picture}}" style="max-height:200px;max-width:100%;border-radius:10px"></img>
+    </div>
+    </a>
+    <ul>
+        <li style="float: left">
+            <span style="display: block;padding: 2px">
+                Hashtags: {{ post.hashtags }}
+            </span>
+        </li>
+    </ul>
+    <div class="button-bar">
+        <button class="button icon ion-ios-paw home-icon-i"></button>
+        <button class="button icon ion-chatbox home-icon-i"></button>
+        <button class="button icon ion-ios-information home-icon-i"></button>
+        <button class="button icon ion-android-share home-icon-i"></button>
+    </div>
+</div>

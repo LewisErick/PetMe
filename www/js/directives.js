@@ -1,66 +1,45 @@
-myApp.directive('homePets', function($location) {
+app.directive('homePets', function() {
   return {
-  	scope: {
-  		img: '=',
-  		hashtags: '=',
-  		info: '=',
-  		comments: '=',
-  		key: '='
-  	},
-    templateUrl: 'directives/homePets.html',
-    controller: function($scope, $element, $document){
-        $scope.selectPost = function(theKey) {
-    			$scope.key = theKey;
-          $location.path('/post/' + $scope.key);
-		  };
-    }
+      replace: true,
+      templateUrl: 'templates/directives/homePets.html'
   };
 });
 
-myApp.directive('userEntry', function() {
+app.directive('userEntry', function() {
   return {
     scope: {
+      id: '=',
       img: '=',
       name: '=',
       text: '='
     },
-    templateUrl: 'directives/userEntry.html',
-    controller: function($scope, $element, $document){
-
+    templateUrl: 'templates/directives/userEntry.html',
+    controller: function($scope, $element, $document, api){
+      api.getComment($scope.id).success(function(data){
+          $scope.post = data;
+      });
+      $scope.img = data.img;
+      $scope.name = data.name;
+      $scope.text = data.text;
     }
   };
 });
-
-//Allows to add a card with information about the pet
+//Allows add a card with information about the pet
 //<adopt-item>More Information</adopt-item>
-myApp.directive('adoptItem',function() {
+app.directive('adoptItem', function() {
     return {
         replace: true,
         transclude: true,
-        templateUrl: 'directives/adoptItem.html',
+        templateUrl: 'templates/directives/adoptItem.html',
     };
 });
 
-//INFO
-myApp.directive('eventItem',function() {
+//Allows add an item with some information about the event
+//<event-item>More Information</event-item>
+app.directive('eventItem', function() {
     return {
         replace: true,
         transclude: true,
-        templateUrl: 'directives/eventItem.html'
-    };
-});
-
-//Allows add a side menu and add content
-//<menus>Content</menus>
-myApp.directive('menus',function() {
-    return {
-        replace: true,
-        transclude: true,
-        templateUrl: 'directives/menus.html',
-        controller: function($scope,$state){
-            $scope.goto = function(toState,params){ 
-                $state.go(toState,params);
-            };
-        }
+        templateUrl: 'templates/directives/eventItem.html'
     };
 });
