@@ -10,7 +10,6 @@ app.controller('LogIn', function($scope, $interval, $ionicModal, $location, $sta
     $scope.background_img_index = 0;
 
     $interval(function() {
-        console.log("Oie cy");
         $scope.background_img_index = ($scope.background_img_index + 1) % 4;
         $scope.background_img_url = $scope.background_imgs[$scope.background_img_index];
 
@@ -33,4 +32,8 @@ app.controller('LogIn', function($scope, $interval, $ionicModal, $location, $sta
             }
         });
 	};
+
+    $scope.register = function() {
+        $state.go('register');
+    };
 });

@@ -5,6 +5,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		templateUrl: 'templates/login.html',
 		controller: 'LogIn'
 	});
+    $stateProvider.state('register', {
+        url: '/register',
+        templateUrl: 'templates/register.html',
+        controller: 'Register'
+    });
     //Provides the side menu and more information. Can't be accessed without a child view and controller
     $stateProvider.state('home', {
         url: '/home',
