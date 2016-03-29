@@ -1,0 +1,29 @@
+﻿<ion-view view-title="Crear Evento">
+    <!-- Main Content of the Event -->
+    <ion-content class="has-header" overflow-scroll="false">
+        <br>
+        <div class="list">
+            <label class="item item-input">
+                <span class="input-label">Nombre</span>
+                <input type="text" ng-model="event.title">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Fecha</span>
+                <input type="date" ng-model="event.date">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Descripción</span>
+                <textarea rows="8" cols="10" ng-model="event.description"></textarea>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Fotos</span>
+                <button class="button button-outline button-balanced">Galería</button>
+            </label>
+        </div>
+        <div class="col text-center">
+            <button class="button button-positive" ng-click="createEvent(event)" style="width: 60%;">
+                Crear Evento
+            </button>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,5 +1,5 @@
 app.config(function($stateProvider, $urlRouterProvider) {
-    
+    //
     $stateProvider.state('login', {
 		url: '/login',
 		templateUrl: 'templates/login.html',
@@ -12,6 +12,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         templateUrl: 'templates/home.html',
         controller: 'Home'
     });
+    //
 	$stateProvider.state('home.dashboard', {
 		url: '/dashboard',
         views: {
@@ -21,7 +22,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             }
         }
 	});
-
+    //
     $stateProvider.state('home.post', {
         url: '/posts/:id',
         views: {
@@ -31,7 +32,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
             }
         }
     });
-
     //Provides the page with the list of pets in adoption
     $stateProvider.state('home.adoptions', {
         url: '/adoptions',
@@ -42,7 +42,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
             }
         }
     });
-
     //Provdies the page with information about a specific pet in adoption
     $stateProvider.state('home.adoption', {
         url: '/adoptions/:id',
@@ -73,7 +72,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
             }
         }
     });
-	
+    //Create an Event
+    $stateProvider.state('home.createEvent', {
+        url: '/createEvent',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/createEvent.html',
+                controller: 'CreateEvent'
+            }
+        }
+    });
+	//
 	$stateProvider.state('home.profile', {
 		url: '/profile/:username',
         views: {
@@ -84,18 +93,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
             }
         }
 	});
-
+    //
 	$stateProvider.state('photo', {
 		url: '/photo',
 		templateUrl: 'templates/photo.html',
 		controller: 'Photo'
 	});
-	
+	//
     $stateProvider.state('firstSteps', {
         url: '/firstSteps',
         templateUrl: 'templates/firstSteps.html',
     });
-    
+
     //Default page to be loaded
     $urlRouterProvider.otherwise('/login');
     

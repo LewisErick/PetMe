@@ -1,4 +1,4 @@
-app.controller('Home', function($scope, $state, $rootScope, api) {
+app.controller('Home', function($scope, $state, api, localStorage) {
     
     /*No functionality yet*/
     $scope.doRefresh = function(){
@@ -7,7 +7,12 @@ app.controller('Home', function($scope, $state, $rootScope, api) {
     };
     
     $scope.goToProfile = function(){
-        $state.go('home.profile', {username: api.getCurrentUser()});
+        $state.go('home.profile', {username: localStorage.getUsername()});
     }
+
+    $scope.logOff = function(){
+        localStorage.clearUser();
+        $state.go('login');
+    };
     
 });

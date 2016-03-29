@@ -1,4 +1,4 @@
-app.controller('LogIn', function($scope, $interval, $ionicModal, $location, $state, api) {
+app.controller('LogIn', function($scope, $interval, $ionicModal, $location, $state, api, localStorage) {
     $scope.constants = $scope.constants.login;
 	//Variable initialization
 	$scope.username;
@@ -18,12 +18,11 @@ app.controller('LogIn', function($scope, $interval, $ionicModal, $location, $sta
 
 	//Perform user-password validation and authentification
 	$scope.logIn = function(username, password) {
-        console.log("Execute1");
-		api.validateUser(username, password).success(function(data){
-            console.log("Execute2");
-            if(data){
-                console.log(data);
-                api.setCurrentUser(username);
+	    api.validateUser(username, password)
+        .then(function (data) {
+            var user = data.data;
+            if(user){
+                localStorage.setUser(user);
                 //Switch to the home template (see the stateConfiguration.js file for details)
                 $scope.showMessage = false;
                 $state.go('home.dashboard');
@@ -31,6 +30,9 @@ app.controller('LogIn', function($scope, $interval, $ionicModal, $location, $sta
                 $scope.showMessage = true;
                 //Incorrect username or password
             }
+		})
+        .catch(function (err) {
+            console.log(err);
         });
 	};
 });
