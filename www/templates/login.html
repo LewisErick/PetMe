@@ -3,7 +3,7 @@
 </ion-header-bar>
 <ion-view>
 <ion-content style="background-image: url(img/login/{{ background_img_url }}); background-size: auto, 100%; background-position: center; transition: all 3s;">
-<div class="list">
+<div class="list" style="transition: none;">
 	<!-- Handles the Logo Placeholder -->
 	<div class="logo-space" align="center" valign="center">
         <h2>PetMe</h2>
@@ -35,7 +35,7 @@
 	</button>
   </div>
   <div class="col text-center">
-  <button class="button button-assertive" style="width: 60%;">
+  <button class="button button-assertive" style="width: 60%;" ng-click="register()">
         {{ constants.register }}
   </button>
   </div>
