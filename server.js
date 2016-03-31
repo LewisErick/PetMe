@@ -7,6 +7,74 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/www'));
 
+app.get('/api/users/get?', function (req, res) {
+    users = [1]
+    database.getUsers(database.getDatabase(), { _id: { $in: users } }, function (document) {
+        res.send("");
+        /*if(err){
+            res.status(500).send('Problem while trying to signing up');
+        }*/
+    });
+});
+
+app.get('/api/friends/add?', function (req, res) {
+    id = req.body.id
+    user_id = req.body.user_id
+    database.addFriend(database.getDatabase(), user_id, user_id, function(result) {
+        res.send(result);
+    });
+});
+
+app.get('/api/friends/del?', function (req, res) {
+    id = req.body.id
+    user_ids = req.body.user_ids
+    database.deleteFriend(database.getDatabase(), user_id, user_id, function(result) {
+        res.send(result);
+    });
+});
+
+app.get('/api/friends?', function (req, res) {
+    id = req.body.id
+    user_ids = req.body.users
+    database.getFriends(database.getDatabase(), id, user_ids, function(result) {
+        res.send(result);
+    });
+});
+
+app.get('/api/participants/add?', function (req, res) {
+    user_id = req.body.user_id
+    event_id = req.body.event_id
+    database.addParticipant(database.getDatabase(), event_id, user_id, function(result) {
+        res.send(result);
+    });
+});
+
+app.get('/api/participants/del?', function (req, res) {
+    user_id = req.body.user_id
+    event_id = req.body.event_id
+    database.deleteParticipant(database.getDatabase(), event_id, user_id, function(result) {
+        res.send(result);
+    });
+});
+
+app.get('/api/participants?', function (req, res) {
+    id = req.body.id
+    user_ids = req.body.users
+    database.getFriends(database.getDatabase(), id, user_ids, function(result) {
+        res.send(result);
+    });
+});
+
+app.post('/api/events/create', function (req, res) {
+
+    database.createEvent(database.getDatabase(), req.body, function (event) {
+        res.send(event);
+        /*if(err){
+            res.status(500).send('Error');
+        }*/
+    });
+});
+
 app.get('/api/adoptionPosts?', function (req, res) {
 	var breed = req.query.breed;
 	var data = [];
