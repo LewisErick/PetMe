@@ -9,6 +9,8 @@ app.controller('Register', function($scope, $interval, $ionicModal, $location, $
     $scope.muns;
     $scope.house_phone;
     $scope.cel_phone;
+    $scope.email;
+    $scope.password;
 
     $scope.register = function() {
         console.log("Validate registration.");
@@ -16,13 +18,17 @@ app.controller('Register', function($scope, $interval, $ionicModal, $location, $
         var form = {
             name:$scope.name, 
             last:$scope.last, 
-            age:$scope.age, 
+            age:$scope.age,
             marital:$scope.marital,
             municipality:$scope.municipality, 
-            email:email
+            house: $scope.house_phone,
+            cel: $scope.cel_phone,
+            email:$scope.email,
+            profile_picture: "0.jpg",
+            friends: [],
+            pets: []
         };
-        { "_id" : 2, "username" : "Erick", "name" : "Erick", "password" : "erick", "email" : "lewis.erick@outlook.com", "profile_picture" : "0.jpg", "friends" : [ 1 ], "pets" : [ 1 ] }
 
-        api.registerUser()
+        api.registerUser();
     };
 });

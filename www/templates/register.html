@@ -5,6 +5,14 @@
 
 	<ion-content class="has-header" overflow-scroll="false" style="background-color: #0073B2;">
 		<div class="list" style="width: 90%; margin: 0 auto; background-color: white">
+		<label class="item item-input item-floating-label regist-form">
+		    <span class="input-label">:</span>
+		    <input type="text" placeholder="Correo Electrónico" required ng-model="email">
+		  </label>
+		  <label class="item item-input item-floating-label regist-form">
+		    <span class="input-label">Contraseña:</span>
+		    <input type="text" placeholder="Contraseña" required ng-model="password">
+		  </label>
 		  <label class="item item-input item-floating-label regist-form">
 		    <span class="input-label">Nombre</span>
 		    <input type="text" placeholder="Nombre" required ng-minlength="3" ng-maxlength="40" ng-model="name">
@@ -50,10 +58,6 @@
 		  <label class="item item-input item-floating-label regist-form">
 		    <span class="input-label">Teléfono Celular</span>
 		    <input type="number" placeholder="Teléfono Celular" min="10" max="10" required ng-model="house_phone">
-		  </label>
-		  <label class="item item-input item-floating-label regist-form">
-		    <span class="input-label">Correo electrónico:</span>
-		    <input type="text" placeholder="Correo Electrónico" required ng-model="email">
 		  </label><br>
 		  <button class="button button-full button-positive" ng-click="register()">
 			  Registrarse

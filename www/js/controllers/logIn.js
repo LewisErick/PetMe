@@ -17,9 +17,7 @@ app.controller('LogIn', function($scope, $interval, $ionicModal, $location, $sta
 
 	//Perform user-password validation and authentification
 	$scope.logIn = function(username, password) {
-        console.log("Execute1");
 		api.validateUser(username, password).success(function(data){
-            console.log("Execute2");
             if(data){
                 console.log(data);
                 api.setCurrentUser(username);
