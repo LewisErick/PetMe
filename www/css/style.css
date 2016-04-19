@@ -11,6 +11,19 @@
   width: max-content;
 }
 
+.list .item.item-accordion {
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: 0.09s all linear;
+}
+.list .item.item-accordion.ng-hide {
+  line-height: 0px;
+}
+.list .item.item-accordion.ng-hide-add,
+.list .item.item-accordion.ng-hide-remove {
+  display: block !important;
+}
+
 .itemhorizontal{
   display:block;
   float:left;
@@ -36,6 +49,17 @@
   opacity: 0;
   padding: 0 0px;
 }
+
+/*.spinner svg {
+    width: 40px;
+    height: 40px;
+    background: url(../img/cute_cat.gif);
+    background-size: 40px 40px;
+    clip-path: circle();
+    opacity: 1;
+    fill-opacity: 0;
+}*/
+
 
 .logo-space {
 	width: 100%;

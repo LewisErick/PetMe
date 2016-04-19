@@ -40,11 +40,8 @@ app.factory('api', function($rootScope, $http, $ionicLoading, $window){
 
     return {
         /*Users*/
-        getUser: function (username) {
-            return getSpecial('users', { 'username': username });
-        },
-        getUserByID: function (userID) {
-            return getById('users', userID);
+        getUser: function (user) {
+            return getById('users', user);
         },
         validateUser: function (username, password) {
             return $http.post('/api/users/login', { username: username, password: password });
@@ -55,7 +52,9 @@ app.factory('api', function($rootScope, $http, $ionicLoading, $window){
         getUsers: function (usersID){
             return getByArray('users', 'id', usersID);
         },
-
+        getFriends: function(userID){
+            return $http.get('api/users/' + userID  + '/friends');
+        },
         /*Posts*/
         getPosts: function (number, search) {
             if (search) {
@@ -91,7 +90,7 @@ app.factory('api', function($rootScope, $http, $ionicLoading, $window){
         getEvents: function (number, search) {
             if(search){
                 return getSpecial('events', { 'title': search });
-            }else{
+            } else {
                 return getAll('events');
             }
         },
@@ -106,13 +105,19 @@ app.factory('api', function($rootScope, $http, $ionicLoading, $window){
         },
         sendAttendConfirmation: function (eventID, userID, attend) {
             var attending = attend ? 'attend' : 'unattend';
-            return $http.post('/api/events/' + eventID + '/' + attending + '/' + userID);
+            return $http.put('/api/events/' + eventID + '/' + attending + '/' + userID);
         },
         sendInivitationEvent: function (eventID, userID, users) {
             return $http.post('/api/events/' + eventID + '/invite', { 'from': userID, 'to': users });
         },
         createEvent: function (event) {
             return $http.post('api/events/create', event);
+        },
+        editEvent: function(eventID, newEvent){
+            return $http.put('api/events/edit/' + eventID, newEvent);
+        },
+        deleteEvent: function(eventID){
+            return $http.delete('api/events/delete/' + eventID);
         },
 
         /*Comments*/

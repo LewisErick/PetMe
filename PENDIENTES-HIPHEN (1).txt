@@ -1,0 +1,37 @@
+Erick:
+
+SEGURIDAD
+//Agregar que solo haya varios campos visibles (no password)
+
+*Registrar
+//Log In
+-Image Hash
+
+-Agregar que se puedan mandar HTTP requests con filtros (en queries)
+-HTTP request refresh/más datos
+
+*Agregar HTTP Request GetFriends/GetParticipants para usar:
+{ field: { $in: [<value1>, <value2>, ... <valueN> ] } }
+
+*Crear Posts
+
+*FACEBOOK API
+
+*Encuesta
+//Slide Show
+
+Uriel:
+
+//Password bycrypt
+
+*Checar en las pantallas que tengas sesion iniciada
+
+//Crear Eventos
+
+//Agregar Asistir e Invitar de Eventos *Arreglar "Dejar de asistir"
+*Crear Adopciones
+*First Steps
+
+*REPORTAR CONTENIDO (Para posts en HOME)
+
+FRENZ*

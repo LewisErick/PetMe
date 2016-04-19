@@ -15,7 +15,7 @@ app.controller('LogIn', function($scope, $interval, $ionicModal, $location, $sta
         $scope.background_img_url = $scope.background_imgs[$scope.background_img_index];
 
     }, 5000);
-
+    
 	//Perform user-password validation and authentification
 	$scope.logIn = function(username, password) {
 	    api.validateUser(username, password)
@@ -23,6 +23,7 @@ app.controller('LogIn', function($scope, $interval, $ionicModal, $location, $sta
             var user = data.data;
             if(user){
                 localStorage.setUser(user);
+                console.log(user);
                 //Switch to the home template (see the stateConfiguration.js file for details)
                 $scope.showMessage = false;
                 $state.go('home.dashboard');

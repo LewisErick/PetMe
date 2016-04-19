@@ -1,6 +1,6 @@
-app.controller('Events', function($scope, api) {
+app.controller('Events', function($scope, $state, api) {
     $scope.constants = $scope.constants.events;
-    
+
     $scope.search;
     $scope.$watch('search', function handleChange(newValue, oldValue){
         //Gets information of the events from the service
@@ -13,6 +13,14 @@ app.controller('Events', function($scope, api) {
         });
     });
     
+    $scope.goToCreateEvent = function () {
+        $state.transitionTo('home.createEvent');
+    };
+
+    $scope.goToEvent = function (id) {
+        $state.transitionTo('home.event', { id: id });
+    };
+
     /*TODO: Implement Load More*/
     /*$scope.loadMore = function(){
         //make a request to the server for more content

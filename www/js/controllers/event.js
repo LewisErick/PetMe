@@ -1,6 +1,13 @@
-app.controller('Event', function ($scope, $stateParams, $ionicPopup, localStorage, api) {
+app.controller('Event', function ($scope, $stateParams, $ionicPopup, $state, localStorage, api) {
     $scope.constants = $scope.constants.event;
+
+    var listOfAnimations = [{ path: "/cute_cat.gif" }, { path: "/cute_cat2.gif" }];
+
+    $scope.event;
+    $scope.attend;
+    $scope.friends = [];
     $scope.users = [];
+    $scope.refresherAnimation = listOfAnimations[1];
 
     //Data from the Event
     api.getEvent($stateParams.id)
@@ -44,20 +51,16 @@ app.controller('Event', function ($scope, $stateParams, $ionicPopup, localStorag
         });
     };
 
-    $scope.showPopup = function () {
+
+    $scope.showInviteFriends = function () {
         //List of Friends
-        api.getUserByID(localStorage.getUserID())
+        api.getFriends(localStorage.getUserID())
         .then(function (data) {
-            api.getUsers(data.data.friends)
-            .then(function (data) {
-                $scope.friends = data.data;
-            })
-            .catch(function (err) {
-                console.error(err);
-            });
+            console.log(data.data);
+            $scope.friends = data.data;
         })
         .catch(function (err) {
-            console.error(err);
+            console.log(err);
         });
 
         var myPopup = $ionicPopup.show({
@@ -73,12 +76,12 @@ app.controller('Event', function ($scope, $stateParams, $ionicPopup, localStorag
                         var invited = [];
                         for (var i = 0; i < $scope.friends.length; i++) {
                             if ($scope.friends[i].checked) {
-                                invited.push($scope.friends[i].id);
+                                invited.push($scope.friends[i]._id);
                             }
                         }
                         api.sendInivitationEvent($stateParams.id, localStorage.getUserID(), invited)
                         .then(function (data) {
-
+                            console.log(data.data);
                         })
                         .catch(function (err) {
                             console.log(err);
@@ -87,5 +90,14 @@ app.controller('Event', function ($scope, $stateParams, $ionicPopup, localStorag
                 }
             ]
         });
+    };
+
+    $scope.editEvent = function(){
+        $state.transitionTo('home.editEvent', { id: $stateParams.id });
+    };
+
+    $scope.deleteEvent = function () {
+        api.deleteEvent($stateParams.id);
+        $state.transitionTo('home.events');
     };
 });

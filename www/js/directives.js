@@ -43,3 +43,49 @@ app.directive('eventItem', function() {
         templateUrl: 'templates/directives/eventItem.html'
     };
 });
+
+app.directive('myRefresher', [function () {
+    return {
+        restrict: 'E',
+        replace: true,
+        transclude: true,
+        require: ['?^$ionicScroll', 'myRefresher'],
+        controller: '$ionicRefresher',
+        template:
+        '<div class="scroll-refresher invisible" collection-repeat-ignore style="min-height:120px;top:-120px"> ' +
+          '<div class="ionic-refresher-content" style="position: fixed;bottom:60px;height:100%"' +
+          'ng-class="{\'ionic-refresher-with-text\': pullingText || refreshingText}">' +
+            '<div class="icon-pulling" ng-class="{\'pulling-rotation-disabled\':disablePullingRotation}">' +
+              '<i class="icon {{pullingIcon}}"></i>' +
+            '</div>' +
+            '<div class="icon-refreshing" style="position: fixed;bottom:0px">' +
+              '<ng-transclude></ng-transclude>' +
+            '</div>' +
+          '</div>' +
+        '</div>',
+        link: function ($scope, $element, $attrs, ctrls) {
+
+            // JS Scrolling uses the scroll controller
+            var scrollCtrl = ctrls[0],
+                refresherCtrl = ctrls[1];
+            if (!scrollCtrl || scrollCtrl.isNative()) {
+                // Kick off native scrolling
+                refresherCtrl.init();
+            } else {
+                $element[0].classList.add('js-scrolling');
+                scrollCtrl._setRefresher(
+                  $scope,
+                  $element[0],
+                  refresherCtrl.getRefresherDomMethods()
+                );
+
+                $scope.$on('scroll.refreshComplete', function () {
+                    $scope.$evalAsync(function () {
+                        scrollCtrl.scrollView.finishPullToRefresh();
+                    });
+                });
+            }
+
+        }
+    };
+}]);

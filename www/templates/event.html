@@ -2,13 +2,23 @@
     <!-- Main Content of the Event -->
     <ion-content class="has-header" overflow-scroll="false">
 
-        <ion-refresher on-refresh="$parent.doRefresh()" spinner="bubbles">
-        </ion-refresher>
+        <!-- Refresher -->
+        <my-refresher on-refresh="doRefresh()">
+            <img ng-src="{{ '../img' + refresherAnimation.path }}" />
+        </my-refresher>
+
+        <!-- Edit & Delete Buttons -->
+        <ion-item style="background-color: gainsboro">
+            <button class="button button-balanced" ng-click="editEvent()">Edit</button>
+            <button class="button button-assertive" ng-click="deleteEvent()">Delete</button>
+        </ion-item>
+
+        <br />
 
         <!-- Title & Image -->
         <div align="center" valign="center">
             <h2>{{ event.title }}</h2>
-            <h3>{{ event.date }}</h3>
+            <h3>{{ event.startDate.date | date }}</h3>
             <div class="item">
                 <ion-slide-box>
                     <ion-slide ng-repeat="picture in event.pictures" width="100%">
@@ -20,11 +30,16 @@
             </div>
         </div>
 
-        <br>
-
+        <p>Inicia el {{ event.startDate.date | date:'fullDate' }} a las {{ event.startDate.time | date:'h:mm a' }}</p>
+        <p ng-if="event.endDate">Finaliza el {{ event.endDate.time | date:'fullDate' }} a las {{ event.endDate.time | date:'h:mm a' }}</p>
+        <br />
+        <p>El evento será en {{ event.location }}</p>
+        <br />
         <p>{{ event.description }}</p>
+        <br />
+        <p ng-if="event.ticketLink">Boletos: {{ event.ticketLink }}</p>
 
-        <br>
+        <br />
         <!-- Attend Button -->
         <div align="center" valign="center">
             <button class="button" ng-click="changeAttend()" ng-class="attend ? 'button-black' : 'button-assertive'">{{attend ? 'Dejar de Asistir' : 'Asistir' }}</button>
@@ -37,7 +52,7 @@
                 <h4>{{ constants.friends }}</h4>
             </div>
             <div class="col">
-                <button class="button button-balanced" ng-click="showPopup()">
+                <button class="button button-balanced" ng-click="showInviteFriends()">
                     Invitar
                 </button>
             </div>

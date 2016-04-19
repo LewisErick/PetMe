@@ -91,7 +91,7 @@ exports.getPostByID = function(db, id, callback) {
 }
 
 exports.getUserByID = function(db, id, callback) {
-    db.collection('users').findOne( { _id : id }, { _id : 0, password : 0 } , function(err, document) {
+    db.collection('users').findOne( { _id : new ObjectId(id) }, { _id : 0, password : 0 } , function(err, document) {
         callback(document);
     });
 }
@@ -102,8 +102,14 @@ exports.getUser = function (db, username, callback) {
     });
 }
 
-exports.getUsers = function (db, array, callback) {
-    db.collection('users').find({ _id: { $in: array } }, { _id: 0, password: 0 }, function (err, document) {
+exports.getUsersByArray = function (db, array, callback) {
+    db.collection('users').find({ _id: { $in: array } }, { password: 0 }).toArray(function (err, document) {
+        callback(document);
+    });
+}
+
+exports.getUsers = function (db, query, callback) {
+    db.collection('users').find(query, { _id: 0, password: 0 }).toArray(function (err, document) {
         callback(document);
     });
 }
@@ -126,10 +132,12 @@ exports.checkAttendEvent = function (db, eventID, userID, callback) {
     });
 }
 
-exports.sendInvitations = function (db, eventID, username, invitations, callback) {
-    var la = username + 'invites you to attend to the event: ' + eventID
+exports.sendInvitations = function (db, eventID, userID, invitations, callback) {
     for (var i = 0; i < invitations.length; i++) {
-        db.collection('event').updateOne({ _id: invitations[0] }, { $push: { invitations: { from: userID, event: eventID } } }, function (err, document) {
+        var invitation = { from: userID, event: eventID };
+        console.log(invitations[i]);
+        console.log(invitation);
+        db.collection('users').update({ _id: new ObjectId(invitations[i]) }, { $push: { invitations: invitation } }, function (err, document) {
             callback(document);
         });
     };
@@ -165,16 +173,18 @@ exports.createEvent = function (db, event, callback) {
         organization: event.organization,
         title: event.title,
         description: event.description,
-        date: event.date,
+        startDate: event.startDate,
+        endDate: event.endDate,
+        location: event.location,
         pictures: event.pictures,
-        attendUsers: []
+        ticketLink: event.ticketLink,
+        participants: []
     };
     try {
         db.collection('events').insertOne(newEvent);
-        return true;
+        callback(newEvent);
     } catch (e) {
         console.log(e);
-        return false;
     }
 }
 
@@ -193,8 +203,147 @@ exports.createAdoption = function (db, adoption, callback) {
     }
 }
 
+exports.editEvent = function (db, eventID, event, callback) {
+    var newEvent = {
+        organization: event.organization,
+        title: event.title,
+        description: event.description,
+        startDate: event.startDate,
+        endDate: event.endDate,
+        location: event.location,
+        pictures: event.pictures,
+        ticketLink: event.ticketLink
+    };
+    db.collection('events').update({ _id: new ObjectId(eventID) }, { $set: newEvent }, function (err, document) {
+        callback(document);
+    });
+}
+
+exports.deleteEvent = function (db, eventID, callback) {
+    db.collection('events').remove({ _id: new ObjectId(eventID) }, function (err, document) {
+        callback(document);
+    });
+}
+
 exports.getCommentByID = function(db, id, callback) {
     db.collection('comments').findOne({ _id: id }, function(err, document) {
         callback(document);
     });
 }
+
+exports.addParticipant = function (db, event_id, participant_id, callback) {
+    exports.getEventByID(db, +event_id, function (event) {
+        participants_array = event.participants;
+        participants_array.push(+participant_id);
+        db.collection('events').updateOne(
+            { _id: +event_id },
+            {
+                $set: { "participants": participants_array }
+            }, function (err, results) {
+                callback(results);
+            });
+    });
+}
+
+exports.deleteParticipant = function (db, event_id, participant_id, callback) {
+    exports.getEventByID(db, +event_id, function (event) {
+        participants_array = event.participants;
+        participants_array.splice(participants_array.indexOf(+participant_id), 1);
+        db.collection('events').updateOne(
+            { _id: +event_id },
+            {
+                $set: { "participants": participants_array }
+            }, function (err, results) {
+                callback(results);
+            });
+    });
+}
+
+exports.getParticipants = function (db, event_id, participant_ids, callback) {
+    exports.getEventByID(db, +event_id, function (event) {
+        // Checks if the user_ids array sent is in the current array of the friends of the user
+        participant_array = user.participants;
+        if (participant_ids.length == 0) {
+            participant_ids = participant_array;
+        } else {
+            participant_ids_temp = participant_ids;
+            for (id in participant_ids) {
+                id = participant_ids[id];
+                if (participant_array.indexOf(id) < 0) {
+                    participant_ids_temp.splice(participant_ids_temp.indexOf(id), 1);
+                }
+            }
+            participant_ids = participant_ids_temp;
+        }
+        exports.getUsers(db, { _id: { $in: participant_ids } }, function (users) {
+            callback(users);
+        });
+    });
+}
+
+exports.addFriend = function (db, user_id, friend_id, callback) {
+    exports.getUserByID(db, user_id, function (err, user) {
+        friends_array = user ? user.friends : [];
+        friends_array.push(friend_id);
+        db.collection('users').updateOne(
+            { _id: +user_id },
+            {
+                $set: { "friends": friends_array }
+            }, function (err, results) {
+                callback(results);
+            });
+    });
+}
+
+exports.deleteFriend = function (db, user_id, friend_id, callback) {
+    exports.getUserByID(db, +user_id, function (user) {
+        friends_array = user.friends;
+        friends_array.splice(friends_array.indexOf(friend_id), 1);
+        db.collection('users').updateOne(
+            { _id: +user_id },
+            {
+                $set: { "friends": friends_array }
+            }, function (err, results) {
+                callback(results);
+            });
+    });
+}
+
+exports.getFriends = function (db, user_id, user_ids, callback) {
+    exports.getUserByID(db, user_id, function (user) {
+        // Checks if the user_ids array sent is in the current array of the friends of the user
+        var friends_array = user.friends ? user.friends : [];
+        if (user_ids.length == 0) {
+            user_ids = friends_array;
+        } else {
+            user_ids_temp = user_ids;
+            for (id in user_ids) {
+                id = user_ids[id];
+                if (friends_array.indexOf(id) < 0) {
+                    user_ids_temp.splice(user_ids_temp.indexOf(id), 1);
+                }
+            }
+            user_ids = user_ids_temp;
+        }
+        exports.getUsersByArray(db, user_ids, function (users) {
+            callback(users);
+        });
+    });
+}
+
+/*
+exports.addFriend = function (db, userID, friendID, callback) {
+    db.collection('users').updateOne({_id:new ObjectId(userID)}, { $addToSet: { friends : new ObjectId(friendID) } }, function(err, document){
+        callback(document);
+    });
+}
+
+exports.getFriends = function (db, userID, callback) {
+    exports.getUserByID(db, userID, function (user) {
+        var friends = user.friends ? user.friends : [];
+        db.collection('users').find({ _id: { $in: friends } }, { friends: 0, password: 0 }).toArray(function (err, documents) {
+            callback(documents);
+        });
+    });
+}
+*/

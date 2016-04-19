@@ -1,5 +1,7 @@
-app.controller('Home', function($scope, $state, api, localStorage) {
-    
+app.controller('Home', function($scope, $state, $location, api, localStorage) {
+
+    $scope.active = localStorage.isSessionActive();
+
     /*No functionality yet*/
     $scope.doRefresh = function(){
         //make a new request to the server of the data

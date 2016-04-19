@@ -1,40 +1,68 @@
 {
-    "spanish": {
-        "login": {
-            "title": "Inicio Sesión",
-            "userfield": "Usuario",
-            "passwordfield": "Contraseña",
-            "errormessage": "Usuario o Contraseña Invalida",
-            "signin": "Iniciar Sesión",
-            "facebooksignin": "Facebook",
-            "register": "¡Regístrate ya!"
-        },
-        "menu": {
-            "title": "Menú",
-            "home": "Inicio",
-            "profile": "Perfil",
-            "adoptions": "Adopciones",
-            "events": "Eventos",
-            "configuration": "Preferencias",
-            "help": "Ayuda",
-            "signout": "Salir"
-        },
-        "events": {
-            "title": "Eventos",
-            "search": "Busca un evento",
-            "maxCharacters": 100
-        },
-        "event": {
-            "attend": "Asistir",
-            "friends": "Linea de Amigos"
-        },
-        "adoptionPosts": {
-            "title": "Adopciones",
-            "search": "Buscar cachorros"
-        },
-        "adoptionPost": {
-            "question": "Haz una pregunta a la organización",
-            "adopt": "Adóptame"
-        }
+  "spanish": {
+    "login": {
+      "title": "Inicio Sesión",
+      "userfield": "Usuario",
+      "passwordfield": "Contraseña",
+      "errormessage": "Usuario o Contraseña Invalida",
+      "signin": "Iniciar Sesión",
+      "facebooksignin": "Facebook",
+      "register": "¡Regístrate ya!"
+    },
+    "menu": {
+      "title": "Menú",
+      "home": "Inicio",
+      "profile": "Perfil",
+      "adoptions": "Adopciones",
+      "events": "Eventos",
+      "configuration": "Preferencias",
+      "help": "Ayuda",
+      "signout": "Salir"
+    },
+    "events": {
+      "title": "Eventos",
+      "search": "Busca un evento",
+      "maxCharacters": 100
+    },
+    "event": {
+      "attend": "Asistir",
+      "friends": "Linea de Amigos"
+    },
+    "createEvent": {
+      "title": "Crear Evento",
+      "titleLabel": "Titulo",
+      "startDateLabel": "Fecha de Inicio",
+      "endDateLabel": "Fecha de Finalización",
+      "dateLabel": "Día",
+      "timeLabel": "Hora",
+      "locationLabel": "Lugar",
+      "descriptionLabel": "Descripción",
+      "photosLabel": "Fotos",
+      "photosButton": "Galería de Fotos",
+      "ticketsLabel": "Boletos",
+      "createButton": "Crear Evento"
+    },
+    "editEvent": {
+      "title": "Editar Evento",
+      "titleLabel": "Titulo",
+      "startDateLabel": "Fecha de Inicio",
+      "endDateLabel":  "Fecha de Finalización",
+      "dateLabel": "Día",
+      "timeLabel": "Hora",
+      "locationLabel": "Lugar",
+      "descriptionLabel": "Descripción",
+      "photosLabel": "Fotos",
+      "photosButton": "Galería de Fotos",
+      "ticketsLabel": "Boletos",
+      "createButton": "Editar Evento"
+    },
+    "adoptionPosts": {
+      "title": "Adopciones",
+      "search": "Buscar cachorros"
+    },
+    "adoptionPost": {
+      "question": "Haz una pregunta a la organización",
+      "adopt": "Adóptame"
     }
+  }
 }

@@ -1,28 +1,57 @@
-﻿<ion-view view-title="Crear Evento">
-    <!-- Main Content of the Event -->
+﻿<ion-view view-title="{{ constants.title }}">
     <ion-content class="has-header" overflow-scroll="false">
-        <br>
-        <div class="list">
+        <ion-list>
             <label class="item item-input">
-                <span class="input-label">Nombre</span>
+                <span class="input-label">{{ constants.titleLabel }}</span>
                 <input type="text" ng-model="event.title">
             </label>
+            <label class="item">
+                <span class="input-label">{{ constants.startDateLabel }}</span>
+                <label class="item item-input">
+                    <span class="input-label">{{ constants.dateLabel }}</span>
+                    <input type="date" ng-model="event.startDate.date">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">{{ constants.timeLabel }}</span>
+                    <input type="time" name="time" ng-model="event.startDate.time">
+                </label>
+            </label>
+            <ion-list>
+                <ion-item class="item-stable" ng-click="changeActive()" ng-class="{ active: active }">
+                    <i class="icon" ng-class="active ? 'ion-minus' : 'ion-plus'"></i>
+                    &nbsp;{{ constants.endDateLabel }}
+                </ion-item>
+                <ion-item class="item-accordion" ng-show="active">
+                    <label class="item item-input">
+                        <span class="input-label">{{ constants.dateLabel }}</span>
+                        <input type="date" ng-model="event.endDate.time">
+                    </label>
+                    <label class="item item-input">
+                        <span class="input-label">{{ constants.timeLabel }}</span>
+                        <input type="time" name="time" ng-model="event.endDate.time">
+                    </label>
+                </ion-item>
+            </ion-list>
             <label class="item item-input">
-                <span class="input-label">Fecha</span>
-                <input type="date" ng-model="event.date">
+                <span class="input-label">{{ constants.locationLabel }}</span>
+                <input type="text" ng-model="event.location">
             </label>
             <label class="item item-input">
-                <span class="input-label">Descripción</span>
+                <span class="input-label">{{ constants.descriptionLabel }}</span>
                 <textarea rows="8" cols="10" ng-model="event.description"></textarea>
             </label>
             <label class="item item-input">
-                <span class="input-label">Fotos</span>
-                <button class="button button-outline button-balanced">Galería</button>
+                <span class="input-label">{{ constants.photosLabel }}</span>
+                <button class="button button-outline button-balanced">{{ constants.photosButton }}</button>
             </label>
-        </div>
+            <label class="item item-input">
+                <span class="input-label">{{ constants.ticketsLabel }}</span>
+                <input type="text" ng-model="event.ticketLink">
+            </label>
+        </ion-list>
         <div class="col text-center">
-            <button class="button button-positive" ng-click="createEvent(event)" style="width: 60%;">
-                Crear Evento
+            <button ng-disabled="!checkFields(event)" class="button button-positive" ng-click="createEvent(event)" style="width: 60%;">
+                {{ constants.createButton }}
             </button>
         </div>
     </ion-content>

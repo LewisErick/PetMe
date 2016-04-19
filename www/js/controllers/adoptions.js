@@ -1,4 +1,4 @@
-app.controller('Adoptions', function($scope, api) {
+app.controller('Adoptions', function($scope, $state, api) {
     $scope.constants = $scope.constants.adoptionPosts;
     
     $scope.search;
@@ -9,6 +9,10 @@ app.controller('Adoptions', function($scope, api) {
         });
     });
     
+    $scope.goToCreateAdoption = function () {
+        $state.transitionTo('home.createAdoption');
+    };
+
     $scope.loadMore = function(){
         //make a request to the server for more content
         /*api.getMoreAdoptionPosts($scope.events, 3, $scope.search).then(function(data){
