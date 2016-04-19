@@ -255,17 +255,15 @@ app.get('/api/users/:id', function (req, res) {
 app.get('/api/users?', function(req, res){
 	var username = req.query.username;
 	if(username){
-		var flag = true;
-		for(var i=0; i < users.length; i++){
-			if(users[i].username.toLowerCase() === username.toLowerCase()){
-				res.send(users[i]);
-				flag = false;
-				break;
-			}
-		}
-		if(flag) res.send(undefined);
+		database.getUsers(database.getDatabase(), { username: username }, function (documents) {
+            if (documents) {
+                res.send(documents[0]);
+            } else {
+                console.log("User not found.");
+            }
+        });
 	}else{
-		res.status(500).send('Property '+ username + 'not found');
+		console.log("User not found.");
 	}
 });
 
