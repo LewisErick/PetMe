@@ -8,59 +8,166 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/www'));
 
 app.get('/api/users/get?', function (req, res) {
-    users = [1]
-    database.getUsers(database.getDatabase(), { _id: { $in: users } }, function (document) {
-        res.send("");
-        /*if(err){
-            res.status(500).send('Problem while trying to signing up');
-        }*/
-    });
+    if (req.query.users != undefined || req.body.users != undefined) {
+        if (req.query.users != undefined) {
+            users = req.query.users;
+            users = users.replace('[', '');
+            users = users.replace(']', '');
+            users = users.split(",");
+            for (user in users) {
+                users[user] = +users[user];
+            }
+        } else {
+            users = req.body.users;
+        }
+        database.getUsers(database.getDatabase(), { _id: { $in: users } }, function (documents) {
+            res.send(JSON.stringify(documents));
+            /*if(err){
+                res.status(500).send('Problem while trying to signing up');
+            }*/
+        });
+    } else {
+        database.getUsers(database.getDatabase(), {}, function (documents) {
+            res.send(JSON.stringify(documents));
+            /*if(err){
+                res.status(500).send('Problem while trying to signing up');
+            }*/
+        });
+    }
 });
 
 app.get('/api/friends/add?', function (req, res) {
-    id = req.body.id
-    user_id = req.body.user_id
-    database.addFriend(database.getDatabase(), user_id, user_id, function(result) {
-        res.send(result);
-    });
+    if (req.query.id != undefined) {
+        id = +req.query.id;
+        user_id = +req.query.user_id;
+    } else {
+        id = req.body.id;
+        user_id = req.body.user_id;
+    }
+    if (id != undefined || user_id != undefined) {
+        database.addFriend(database.getDatabase(), id, user_id, function(result) {
+            res.send(result);
+        });
+    } else {
+        res.send("User query to add as a friend undefined.");
+    }
 });
 
 app.get('/api/friends/del?', function (req, res) {
-    id = req.body.id
-    user_ids = req.body.user_ids
-    database.deleteFriend(database.getDatabase(), user_id, user_id, function(result) {
-        res.send(result);
-    });
+    if (req.query.id != undefined) {
+        id = +req.query.id;
+        user_id = +req.query.user_id;
+    } else {
+        id = req.body.id;
+        user_id = req.body.user_id;
+    }
+    if (id != undefined || user_id != undefined) {
+        database.deleteFriend(database.getDatabase(), id, user_id, function(result) {
+            res.send(result);
+        });
+    } else {
+        res.send("User query to add as a friend undefined.");
+    }
 });
 
 app.get('/api/friends?', function (req, res) {
-    id = req.body.id
-    user_ids = req.body.users
-    database.getFriends(database.getDatabase(), id, user_ids, function(result) {
+    if (req.query.id != undefined) {
+        id = +req.query.id;
+    } else {
+        if (req.body.id != undefined) {
+            id = req.body.id;
+        } else {
+            res.send("No User ID supplied.");
+        }
+    }
+    if (req.query.users != undefined) {
+        users = req.query.users;
+        if (users != "[]") {
+            users = users.replace('[', '');
+            users = users.replace(']', '');
+            users = users.split(",");
+            for (user in users) {
+                users[user] = +users[user];
+            }
+        } else {
+            users = [];
+        }
+    } else {
+        if (req.body.users != undefined) {
+            users = req.body.users;
+        } else {
+            users = [];
+        }
+    }
+    database.getFriends(database.getDatabase(), id, users, function(result) {
         res.send(result);
     });
 });
 
 app.get('/api/participants/add?', function (req, res) {
-    user_id = req.body.user_id
-    event_id = req.body.event_id
-    database.addParticipant(database.getDatabase(), event_id, user_id, function(result) {
-        res.send(result);
-    });
+    if (req.query.id != undefined) {
+        id = +req.query.id;
+        user_id = +req.query.user_id;
+    } else {
+        id = req.body.id;
+        user_id = req.body.user_id;
+    }
+    if (id != undefined || user_id != undefined) {
+        database.addParticipant(database.getDatabase(), id, user_id, function(result) {
+            res.send(result);
+        });
+    } else {
+        res.send("User query to add as a participant undefined.");
+    }
 });
 
 app.get('/api/participants/del?', function (req, res) {
-    user_id = req.body.user_id
-    event_id = req.body.event_id
-    database.deleteParticipant(database.getDatabase(), event_id, user_id, function(result) {
-        res.send(result);
-    });
+    if (req.query.id != undefined) {
+        id = +req.query.id;
+        user_id = +req.query.user_id;
+    } else {
+        id = req.body.id;
+        user_id = req.body.user_id;
+    }
+    if (id != undefined || user_id != undefined) {
+        database.deleteParticipants(database.getDatabase(), id, user_id, function(result) {
+            res.send(result);
+        });
+    } else {
+        res.send("User query to delete a participant from event undefined.");
+    }
 });
 
 app.get('/api/participants?', function (req, res) {
-    id = req.body.id
-    user_ids = req.body.users
-    database.getFriends(database.getDatabase(), id, user_ids, function(result) {
+    if (req.query.id != undefined) {
+        id = +req.query.id;
+    } else {
+        if (req.body.id != undefined) {
+            id = req.body.id;
+        } else {
+            res.send("No User ID supplied.");
+        }
+    }
+    if (req.query.users != undefined) {
+        users = req.query.users;
+        if (users != "[]") {
+            users = users.replace('[', '');
+            users = users.replace(']', '');
+            users = users.split(",");
+            for (user in users) {
+                users[user] = +users[user];
+            }
+        } else {
+            users = [];
+        }
+    } else {
+        if (req.body.users != undefined) {
+            users = req.body.users;
+        } else {
+            users = [];
+        }
+    }
+    database.getParticipants(database.getDatabase(), id, users, function(result) {
         res.send(result);
     });
 });

@@ -1,9 +1,9 @@
 <div class="row profile-wrapper">
-	<div class="item item-avatar item-thumbnail-left">
-		<img ng-src="/img/{{ img }}">
-        <!--<div class="col profile-details">-->
-            <h1 style="font-size: 100%">{{ name }}</h1>
-        <!--</div>-->
-    </div>
+	<div class="col profile-pic">
+		<img ng-src="/img/users/{{ img }}">
+	</div>
+	<div class="col profile-details">
+		{{ name }}<br>
+		{{ text }}
+	</div>
 </div>
-

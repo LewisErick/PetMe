@@ -62,6 +62,12 @@ exports.getEvents = function(db, callback, query) {
     }
 }
 
+exports.getEventByID = function(db, id, query) {
+    db.collection('events').findOne( { _id: id }, { _id: 0 }, (function(err, document) {
+        callback(document);
+    }));
+}
+
 exports.getPosts = function(db, callback) {
     db.collection('posts').find().toArray(function(err, documents) {
         callback(documents);
@@ -92,59 +98,58 @@ exports.getCommentByID = function(db, id, callback) {
     });
 }
 
-exports.addParticipant = function(db, event_id, user_id, callback) {
-    getEvent(db, +event_id, function (event) {
+exports.addParticipant = function(db, event_id, participant_id, callback) {
+    exports.getEventByID(db, +event_id, function (event) {
         participants_array = event.participants;
-        participants_array.push(user_id)
+        participants_array.push(+participant_id);
         db.collection('events').updateOne(
             { _id : +event_id },
             {
                 $set: { "participants": participants_array }
             }, function(err, results) {
-                callback(results);
-            }
-        );
+            callback(results);
+        });
     });
 }
 
-exports.deleteParticipant = function(db, event_id, user_id, callback) {
-    getEvent(db, +event_id, function (event) {
+exports.deleteParticipant = function(db, event_id, participant_id, callback) {
+    exports.getEventByID(db, +event_id, function (event) {
         participants_array = event.participants;
-        participants_array.splice(participants_array.findIndex(user_id), 1);
+        participants_array.splice(participants_array.indexOf(+participant_id), 1);
         db.collection('events').updateOne(
             { _id : +event_id },
             {
                 $set: { "participants": participants_array }
             }, function(err, results) {
-                callback(results);
-            }
-        );
+            callback(results);
+        });
     });
 }
 
-exports.getParticipants = function(db, event_id, user_ids, callback) {
-    getEvent(db, event_id, function(event) {
-        // Checks if the user_ids array sent is in the current array of the participants of the event
-        participants_array = event.participants;
-        if (users_ids == null || user_ids == []) {
-            user_ids = participants_array
+exports.getParticipants = function(db, event_id, participant_ids, callback) {
+    exports.getEventByID(db, +event_id, function(event) {
+        // Checks if the user_ids array sent is in the current array of the friends of the user
+        participant_array = user.participants;
+        if (participant_ids.length == 0) {
+            participant_ids = participant_array;
         } else {
-            user_ids_temp = user_ids
-            for (id in user_ids) {
-                if (participants_array.findIndex(id) < 0) {
-                    user_ids_temp.splice(user_ids_temp.findIndex(id), 1);
+            participant_ids_temp = participant_ids;
+            for (id in participant_ids) {
+                id = participant_ids[id];
+                if (participant_array.indexOf(id) < 0) {
+                    participant_ids_temp.splice(participant_ids_temp.indexOf(id), 1);
                 }
             }
-            user_ids = user_ids_temp
+            participant_ids = participant_ids_temp;
         }
-        getUsers(db, { _id: { $in: user_ids} }, function(users) {
+        exports.getUsers(db, { _id: { $in: participant_ids} }, function(users) {
             callback(users);
         });
     });
 }
 
 exports.addFriend = function(db, user_id, friend_id, callback) {
-    getUserByID(db, +user_id, function (err, user) {
+    exports.getUserByID(db, user_id, function (user) {
         friends_array = user.friends;
         friends_array.push(friend_id);
         db.collection('users').updateOne(
@@ -157,10 +162,11 @@ exports.addFriend = function(db, user_id, friend_id, callback) {
     });
 }
 
+
 exports.deleteFriend = function(db, user_id, friend_id, callback) {
-    getUserByID(db, +user_id, function (err, user) {
+    exports.getUserByID(db, +user_id, function (user) {
         friends_array = user.friends;
-        friends_array.splice(friends_array.findIndex(+friend_id), 1);
+        friends_array.splice(friends_array.indexOf(friend_id), 1);
         db.collection('users').updateOne(
             { _id : +user_id },
             {
@@ -172,35 +178,31 @@ exports.deleteFriend = function(db, user_id, friend_id, callback) {
 }
 
 exports.getFriends = function(db, user_id, user_ids, callback) {
-    getUserByID(db, +user_id, function(user) {
+    exports.getUserByID(db, +user_id, function(user) {
         // Checks if the user_ids array sent is in the current array of the friends of the user
         friends_array = user.friends;
-        if (users_ids == [] || user_ids == null) {
+        if (user_ids.length == 0) {
             user_ids = friends_array;
         } else {
             user_ids_temp = user_ids;
             for (id in user_ids) {
-                if (friends_array.findIndex(id) < 0) {
-                    user_ids_temp.splice(user_ids_temp.findIndex(id), 1);
+                id = user_ids[id];
+                if (friends_array.indexOf(id) < 0) {
+                    user_ids_temp.splice(user_ids_temp.indexOf(id), 1);
                 }
             }
             user_ids = user_ids_temp;
         }
-        getUsers(db, { _id: { $in: user_ids} }, function(users) {
+        exports.getUsers(db, { _id: { $in: user_ids} }, function(users) {
             callback(users);
         });
     });
 }
 
 exports.getUsers = function (db, query, callback) {
-    db.collection('users').find( { _id: { $in : [new ObjectID(1),new ObjectID(2)] } }, function(documents) {
-        console.log(documents);
-        callback(documents);
+    db.collection('users').find(query).toArray(function(err, results){
+        callback(results); // output all records
     });
-    //db.collection('users').find({_id:{$in:[1,2]}}, { _id: 0, password: 0 }, function (document) {
-    //    console.log(document);
-    //    callback(document);
-    //});
 }
 
 exports.createEvent = function (db, event, callback) {

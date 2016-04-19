@@ -26,5 +26,8 @@
   ],
   "cordovaPlatforms": [
     "ios"
-  ]
+  ],
+  "scripts": {
+    "start": "mongod --port 5400 | node server.js"
+  }
 }
