@@ -29,7 +29,10 @@ var generateHash = function (plainPassword) {
 };
 //Function to check if a hashed password matches a plain password
 var validPassword = function (plainPassword, hashedPassword) {
-    return bcrypt.compareSync(plainPassword, hashedPassword);
+    console.log(plainPassword);
+    console.log(hashedPassword);
+    return (plainPassword == hashedPassword);
+    //return bcrypt.compareSync(plainPassword, hashedPassword);
 };
 
 var getAdoptionPosts_impl1 = function(db, callback) {
@@ -145,6 +148,8 @@ exports.sendInvitations = function (db, eventID, userID, invitations, callback) 
 
 exports.validateUser = function(db, username, password, callback) {
     db.collection('users').findOne({ username: username }, function (err, user) {
+        console.log(user);
+        console.log(validPassword(password, user.password));
         if (user && validPassword(password, user.password)){
             callback(user);
         }

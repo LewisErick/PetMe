@@ -82,6 +82,7 @@ app.post('/api/users/signup', function (req, res) {
  */
 app.post('/api/users/login', function (req, res) {
     database.validateUser(database.getDatabase(), req.body.username, req.body.password, function (document) {
+        console.log(document);
         res.send(JSON.stringify(document));
     });
 });

@@ -10,7 +10,6 @@ app.controller('LogIn', function($scope, $interval, $ionicModal, $location, $sta
     $scope.background_img_index = 0;
 
     $interval(function() {
-        console.log("Oie cy");
         $scope.background_img_index = ($scope.background_img_index + 1) % 4;
         $scope.background_img_url = $scope.background_imgs[$scope.background_img_index];
 
@@ -18,8 +17,10 @@ app.controller('LogIn', function($scope, $interval, $ionicModal, $location, $sta
     
 	//Perform user-password validation and authentification
 	$scope.logIn = function(username, password) {
+        console.log("Why");
 	    api.validateUser(username, password)
         .then(function (data) {
+            console.log("How");
             var user = data.data;
             if(user){
                 localStorage.setUser(user);
