@@ -1,4 +1,44 @@
 {
+<<<<<<< HEAD
+    "spanish": {
+        "login": {
+            "title": "Inicio Sesión",
+            "userfield": "Usuario",
+            "passwordfield": "Contraseña",
+            "errormessage": "Usuario o Contraseña Invalida",
+            "signin": "Iniciar Sesión",
+            "facebooksignin": "Facebook",
+            "register": "¡Regístrate ya!",
+            "regist": "Registro"
+        },
+        "menu": {
+            "title": "Menú",
+            "home": "Inicio",
+            "profile": "Perfil",
+            "adoptions": "Adopciones",
+            "events": "Eventos",
+            "configuration": "Preferencias",
+            "help": "Ayuda",
+            "signout": "Salir"
+        },
+        "events": {
+            "title": "Eventos",
+            "search": "Busca un evento",
+            "maxCharacters": 100
+        },
+        "event": {
+            "attend": "Asistir",
+            "friends": "Linea de Amigos"
+        },
+        "adoptionPosts": {
+            "title": "Adopciones",
+            "search": "Buscar cachorros"
+        },
+        "adoptionPost": {
+            "question": "Haz una pregunta a la organización",
+            "adopt": "Adóptame"
+        }
+=======
   "spanish": {
     "login": {
       "title": "Inicio Sesión",
@@ -63,6 +103,7 @@
     "adoptionPost": {
       "question": "Haz una pregunta a la organización",
       "adopt": "Adóptame"
+>>>>>>> events
     }
   }
 }

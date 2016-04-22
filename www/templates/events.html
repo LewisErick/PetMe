@@ -4,6 +4,7 @@
     <div class="bar bar-subheader item item-input">
         <i class="icon ion-search placeholder-icon"></i>
         <input type="text" placeholder="{{ constants.search }}" ng-model="search">
+        <a class="button button-clear button-balanced icon button-icon ion-plus-circled" ng-click="goToCreateEvent()"></a>
     </div>
         
     <!-- Scroll content with list of events -->
@@ -12,10 +13,10 @@
         <ion-refresher on-refresh="$parent.doRefresh()" spinner="bubbles">
         </ion-refresher>
         
-        <div ng-repeat="event in events">
+        <ion-list ng-repeat="event in events">
             <event-item event="event">
             </event-item>
-        </div>
+        </ion-list>
         
         <ion-infinite-scroll on-infinite="loadMore()" distance="1%">
         </ion-infinite-scroll>

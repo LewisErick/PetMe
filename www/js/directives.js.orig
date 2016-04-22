@@ -13,7 +13,19 @@ app.directive('userEntry', function() {
       name: '=',
       text: '='
     },
+<<<<<<< HEAD
     templateUrl: 'templates/directives/userEntry.html'
+=======
+    templateUrl: 'templates/directives/userEntry.html',
+    /*controller: function($scope, $element, $document, api){
+      api.getComment($scope.id).success(function(data){
+          $scope.post = data;
+      });
+      $scope.img = data.img;
+      $scope.name = data.name;
+      $scope.text = data.text;
+    }*/
+>>>>>>> events
   };
 });
 //Allows add a card with information about the pet

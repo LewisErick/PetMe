@@ -17,6 +17,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         templateUrl: 'templates/home.html',
         controller: 'Home'
     });
+    //
 	$stateProvider.state('home.dashboard', {
 		url: '/dashboard',
         views: {
@@ -58,6 +59,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
             }
         }
     });
+    //Create an Adoption
+    $stateProvider.state('home.createAdoption', {
+        url: '/create/adoption',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/createAdoption.html',
+                controller: 'CreateAdoption'
+            }
+        }
+    });
     //Provides the page with the list of events
     $stateProvider.state('home.events', {
         url: '/events',
@@ -70,15 +81,36 @@ app.config(function($stateProvider, $urlRouterProvider) {
     });
     //Provides the page with information about a specific event
     $stateProvider.state('home.event', {
-        url: '/events/:id',
+        url: '/event/:id',
         views: {
             'menuContent': {
                 templateUrl: 'templates/event.html',
                 controller: 'Event'
             }
         }
+        
     });
-	
+    //Create an Event
+    $stateProvider.state('home.createEvent', {
+        url: '/create/event',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/createEvent.html',
+                controller: 'CreateEvent'
+            }
+        }
+    });
+    $stateProvider.state('home.editEvent', {
+        url: '/edit/:id',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/editEvent.html',
+                controller: 'EditEvent'
+            }
+        }
+    });
+
+	//
 	$stateProvider.state('home.profile', {
 		url: '/profile/:username',
         views: {
@@ -89,18 +121,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
             }
         }
 	});
-
+    //
 	$stateProvider.state('photo', {
 		url: '/photo',
 		templateUrl: 'templates/photo.html',
 		controller: 'Photo'
 	});
-	
+	//
     $stateProvider.state('firstSteps', {
         url: '/firstSteps',
         templateUrl: 'templates/firstSteps.html',
     });
-    
+
     //Default page to be loaded
     $urlRouterProvider.otherwise('/login');
     

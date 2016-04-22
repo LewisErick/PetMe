@@ -1,8 +1,8 @@
-<a class="item item-avatar item-thumbnail-left" ng-href="#/home/events/{{ event.id }}">
+<a class="item item-avatar item-thumbnail-left" ng-click="goToEvent(event._id)">
     <!-- Basic Information about an Event -->
     <img ng-src="img/{{ event.pictures[0] }}">
     <h2>{{ event.title }}</h2>
-    <h3>{{ event.date }}</h3>
+    <h3>{{ event.date | date }}</h3>
     
     <!-- Checks the length of the description and makes if short if necessary -->
     <p ng-if="event.description.length > constants.maxCharacters">{{ event.description.substr(0, maxCharacters) }}...</p>

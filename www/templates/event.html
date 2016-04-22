@@ -1,58 +1,73 @@
 <ion-view view-title="Evento">
     <!-- Main Content of the Event -->
     <ion-content class="has-header" overflow-scroll="false">
-        
-        <ion-refresher on-refresh="$parent.doRefresh()" spinner="bubbles">
-        </ion-refresher>
 
-            <!-- Title & Image -->
-            <div align="center" valign="center">
-                <h2>{{ event.title }}</h2>
-                <h3>{{ event.date }}</h3>
-                <div class="item">
-                    <ion-slide-box>
-                        <ion-slide ng-repeat="picture in event.pictures" width="100%">
-                            <div align="center" valign="center">
-                                <img ng-src="img/{{ picture }}" style="border-radius: 10px;width:100%" alt="evento">
-                            </div>
-                        </ion-slide>
-                    </ion-slide-box>
-                </div>
+        <!-- Refresher -->
+        <my-refresher on-refresh="doRefresh()">
+            <img ng-src="{{ '../img' + refresherAnimation.path }}" />
+        </my-refresher>
+
+        <!-- Edit & Delete Buttons -->
+        <ion-item style="background-color: gainsboro">
+            <button class="button button-balanced" ng-click="editEvent()">Edit</button>
+            <button class="button button-assertive" ng-click="deleteEvent()">Delete</button>
+        </ion-item>
+
+        <br />
+
+        <!-- Title & Image -->
+        <div align="center" valign="center">
+            <h2>{{ event.title }}</h2>
+            <h3>{{ event.startDate.date | date }}</h3>
+            <div class="item">
+                <ion-slide-box>
+                    <ion-slide ng-repeat="picture in event.pictures" width="100%">
+                        <div align="center" valign="center">
+                            <img ng-src="img/{{ picture }}" style="border-radius: 10px;width:100%" alt="evento">
+                        </div>
+                    </ion-slide>
+                </ion-slide-box>
             </div>
-            
-            <!-- Description -->
-            <p>{{ event.description }}</p>
-            
-            <br>
-            <!-- Attend Button -->
-            <div align="center" valign="center">
-                <button class="button button-assertive">Asistir</button>
-            </div>    
-        
-            <br>
-            <!-- Friends Tag -->
-            <div class="row">
-                <div align="center" class="col col-75">
-                    <h4>{{ constants.friends }}</h4>
-                </div>
-                <div class="col">
-                    <button class="button button-balanced">
-                        Invitar
-                    </button>
-                </div>
+        </div>
+
+        <p>Inicia el {{ event.startDate.date | date:'fullDate' }} a las {{ event.startDate.time | date:'h:mm a' }}</p>
+        <p ng-if="event.endDate">Finaliza el {{ event.endDate.time | date:'fullDate' }} a las {{ event.endDate.time | date:'h:mm a' }}</p>
+        <br />
+        <p>El evento será en {{ event.location }}</p>
+        <br />
+        <p>{{ event.description }}</p>
+        <br />
+        <p ng-if="event.ticketLink">Boletos: {{ event.ticketLink }}</p>
+
+        <br />
+        <!-- Attend Button -->
+        <div align="center" valign="center">
+            <button class="button" ng-click="changeAttend()" ng-class="attend ? 'button-black' : 'button-assertive'">{{attend ? 'Dejar de Asistir' : 'Asistir' }}</button>
+        </div>
+
+        <br>
+        <!-- Friends Tag -->
+        <div class="row">
+            <div align="center" class="col col-75">
+                <h4>{{ constants.friends }}</h4>
             </div>
-            <!-- List of Friends -->
-            <ion-list>
-                <ion-scroll id="ionScrollRegion" direction="x" overflow-scroll="false">
-                    <div id="overflowingContent">
-                        <ion-item class="item item-avatar itemhorizontal" href="#/home/profile/{{ user.username }}" ng-repeat="user in users">
-                            <img ng-src="img/{{ user.profilePicture }}"><img>
-                            <span>{{ user.username }}</span>
-                        </ion-item>
-                    </div>
-                </ion-scroll>
-            </ion-list>
-            <br>
+            <div class="col">
+                <button class="button button-balanced" ng-click="showInviteFriends()">
+                    Invitar
+                </button>
+            </div>
+        </div>
+        <!-- List of Friends -->
+        <ion-list>
+            <ion-scroll id="ionScrollRegion" direction="x" overflow-scroll="false">
+                <div id="overflowingContent">
+                    <ion-item class="item item-avatar itemhorizontal" href="#/home/profile/{{ user.username }}" ng-repeat="user in users">
+                        <img ng-src="img/{{ user.profilePicture }}"><img>
+                        <span>{{ user.username }}</span>
+                    </ion-item>
+                </div>
+            </ion-scroll>
+        </ion-list>
+        <br>
     </ion-content>
-    
 </ion-view>
