@@ -156,23 +156,6 @@ exports.validateUser = function(db, username, password, callback) {
     });
 }
 
-exports.createUser = function (db, user, callback) {
-    var hashedPassword = generateHash(user.password);
-    var newUser = {
-        username: user.username,
-        name: user.name,
-        email: user.email,
-        password: hashedPassword
-    }
-    try {
-        db.collection('users').insertOne(newUser);
-        return true;
-    }catch (e) {
-        console.log(e);
-        return false;
-    }
-}
-
 exports.createEvent = function (db, event, callback) {
     var newEvent = {
         organization: event.organization,
@@ -332,22 +315,6 @@ exports.getFriends = function (db, user_id, user_ids, callback) {
         }
         exports.getUsersByArray(db, user_ids, function (users) {
             callback(users);
-        });
-    });
-}
-
-/*
-exports.addFriend = function (db, userID, friendID, callback) {
-    db.collection('users').updateOne({_id:new ObjectId(userID)}, { $addToSet: { friends : new ObjectId(friendID) } }, function(err, document){
-        callback(document);
-    });
-}
-
-exports.getFriends = function (db, userID, callback) {
-    exports.getUserByID(db, userID, function (user) {
-        var friends = user.friends ? user.friends : [];
-        db.collection('users').find({ _id: { $in: friends } }, { friends: 0, password: 0 }).toArray(function (err, documents) {
-            callback(documents);
         });
     });
 }
