@@ -7,6 +7,15 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/www'));
 
+app.post('/api/users/signup', function (req, res) {
+    database.createUser(database.getDatabase(), req.body, function (document) {
+        res.send(JSON.stringify(document));
+        //if(err){
+        //    res.status(500).send('Problem while trying to signing up');
+        //}
+    });
+});
+
 app.get('/api/users/get?', function (req, res) {
     if (req.query.users != undefined || req.body.users != undefined) {
         if (req.query.users != undefined) {
@@ -276,10 +285,3 @@ app.post('/api/login', function(req, res) {
 app.listen(8100, function () {
   console.log('Ready');
 });
-
-
-var adoptionPosts = [];
-
-var posts = [];
-
-var events = [];

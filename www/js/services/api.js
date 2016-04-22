@@ -41,6 +41,9 @@ app.factory('api', function($rootScope, $http, $ionicLoading, $window){
     };
     
     return {
+        createUser: function (user) {
+            return $http.post('/api/users/signup', user);
+        },
         getAdoptionPosts: function(number, search){
             if(search){
                 return getSpecial('adoptionPosts', 'breed', search);

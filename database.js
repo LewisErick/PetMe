@@ -3,6 +3,7 @@
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 var ObjectId = require('mongodb').ObjectID;
+var bcrypt = require('bcrypt');
 
 //Local database variable
 var db_petme;
@@ -16,6 +17,12 @@ MongoClient.connect(url, function(err, db) {
     assert.equal(null, err);
     console.log("Connected correctly to server.");
 });
+
+//Function to generate a new hash for a password
+var generateHash = function (plainPassword) {
+    var hashedPassword = bcrypt.hashSync(plainPassword, bcrypt.genSaltSync(9));
+    return hashedPassword;
+};
 
 exports.getDatabase = function() {
     return db_petme;
@@ -219,6 +226,31 @@ exports.createEvent = function (db, event, callback) {
         db.collection('events').insertOne(newEvent);
         return true;
     } catch (e) {
+        console.log(e);
+        return false;
+    }
+}
+
+exports.createUser = function (db, user, callback) {
+    var hashedPassword = generateHash(user.password);
+    var newUser = {
+        email: user.email,
+        password: hashedPassword,
+        name: user.name,
+        last: user.last,
+        age: user.age,
+        marital: user.martial,
+        municipality: user.municipality,
+        house_phone: user.house_phone,
+        cel_phone: user.cel_phone,
+        confirmation: false,
+        pets: [],
+        friends: []
+    }
+    try {
+        db.collection('users').insertOne(newUser);
+        return true;
+    }catch (e) {
         console.log(e);
         return false;
     }

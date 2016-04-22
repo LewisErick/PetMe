@@ -4,35 +4,50 @@
 <ion-view view-title="{{ constants.title }}">
 
 	<ion-content class="has-header" overflow-scroll="false" style="background-color: #0073B2;">
+	<form name="userForm">
 		<div class="list" style="width: 90%; margin: 0 auto; background-color: white">
 		<label class="item item-input item-floating-label regist-form">
-		    <span class="input-label">:</span>
-		    <input type="text" placeholder="Correo Electrónico" required ng-model="email">
+		    <span class="input-label">Correo Electrónico:</span>
+		    <input type="email" name="email" placeholder="Correo Electrónico" required ng-model="form.email">
+		    <div style="color:red" ng-show="submitted && userForm.email.$error.required">Correo incorrecto</div>
+		    <div style="color:red" ng-show="submitted && userForm.email.$error.email">Correo incorrecto</div>
 		  </label>
 		  <label class="item item-input item-floating-label regist-form">
 		    <span class="input-label">Contraseña:</span>
-		    <input type="text" placeholder="Contraseña" required ng-model="password">
+		    <input type="password" name="password" placeholder="Contraseña" ng-minlength="6" ng-maxlength="30" required ng-model="form.password">
+		    <div style="color:red" ng-show="submitted && userForm.password.$error.required">Campo Requerido</div>
+		    <div style="color:red" ng-show="submitted && userForm.password.$error.minlength">La contraseña es de mínimo 6 caracteres</div>
+		    <div style="color:red" ng-show="submitted && userForm.password.$error.maxlength">La contraseña es de máximo 30 caracteres</div>
 		  </label>
 		  <label class="item item-input item-floating-label regist-form">
 		    <span class="input-label">Nombre</span>
-		    <input type="text" placeholder="Nombre" required ng-minlength="3" ng-maxlength="40" ng-model="name">
+		    <input type="text" placeholder="Nombre" name="name" required ng-model="form.name">
+		    <div style="color:red" ng-show="submitted && userForm.name.$error.required">Campo Requerido</div>
 		  </label>
 		  <label class="item item-input item-floating-label regist-form">
 		    <span class="input-label">Apellido</span>
-		    <input type="text" placeholder="Apellido" required ng-minlength="3" ng-maxlength="40" ng-model="last">
+		    <input type="text" placeholder="Apellido" name="last" required ng-model="form.last">
+		    <div style="color:red" ng-show="submitted && userForm.last.$error.required">Campo Requerido</div>
 		  </label>
 		  <label class="item item-input item-floating-label regist-form">
 		    <span class="input-label">Edad</span>
-		    <input type="number" placeholder="Edad" min="18" max="99" required ng-model="age">
+		    <input type="text" name="age" placeholder="Edad" ng-minlength="2" ng-maxlength="2" ng-pattern="/^\d+$/" required ng-model="form.age">
+		    <div style="color:red" ng-show="userForm.age.$error.pattern">Solamente incluir números</div>
+		    <div style="color:red" ng-show="submitted && userForm.age.$error.required">Campo Requerido</div>
+		    <div style="color:red" ng-show="userForm.age.$error.minlength">Edad mínima de 18 años y máxima de 99 años</div>
+		    <div style="color:red" ng-show="userForm.age.$error.maxlength">Edad mínima de 18 años y máxima de 99 años</div>
 		  </label>
 		  <label class="item item-input item-select">
 		    <div class="input-label">
 		      Estado Civil
 		    </div>
-		    <select required ng-model="marital">
+		    <select required ng-model="form.marital" name="marital">
 		      <option selected>Soltero</option>
 		      <option>Casado</option>
 		    </select>
+		  </label>
+		  <label class="item" ng-show="submitted && userForm.marital.$error.required">
+		  	<div style="color:red">Campo Requerido</div>
 		  </label>
 		  <label class="item item-input">
 		    <span class="input-label">México</span>
@@ -44,24 +59,30 @@
 		    <div class="input-label">
 		      Municipio
 		    </div>
-		    <select required ng-model="municipality">
+		    <select required ng-model="form.municipality">
 		      <option selected>Monterrey</option>
 		      <div ng-model="mun_options" ng-repeat="mun in muns">
 		    	<option>{{mun}}</option>
 		      </div>
 		    </select>
 		  </label>
+		  <div class="item" style="color:red" ng-show="submitted && userForm.marital.$error.required">Campo Requerido</div>
 		  <label class="item item-input item-floating-label regist-form">
 		    <span class="input-label">Teléfono de Casa</span>
-		    <input type="number" placeholder="Teléfono de Casa" min="10" max="10" required ng-model="house_phone">
+		    <input type="text" name="housePhone" placeholder="Teléfono de Casa" ng-pattern="/^\d+$/" required ng-model="form.house_phone">
+		    <div style="color:red" ng-show="userForm.housePhone.$error.pattern">Solamente incluir números</div>
+		    <div style="color:red" ng-show="submitted && userForm.housePhone.$error.required">Campo Requerido</div>
 		  </label>
 		  <label class="item item-input item-floating-label regist-form">
 		    <span class="input-label">Teléfono Celular</span>
-		    <input type="number" placeholder="Teléfono Celular" min="10" max="10" required ng-model="house_phone">
+		    <input type="text" name="celPhone" placeholder="Teléfono Celular" ng-pattern="/^\d+$/" required ng-model="form.cel_phone">
+		    <div style="color:red" ng-show="userForm.celPhone.$error.pattern">Solamente incluir números</div>
+		    <div style="color:red" ng-show="submitted && userForm.celPhone.$error.required">Campo Requerido</div>
 		  </label><br>
-		  <button class="button button-full button-positive" ng-click="register()">
+		  <button class="button button-full button-positive" ng-click="submitted=true; register(form)">
 			  Registrarse
 			</button>
 		</div>
+	</form>
 	</ion-content>
 </ion-view>

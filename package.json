@@ -2,7 +2,15 @@
   "name": "petme",
   "version": "1.1.1",
   "description": "PetMe: An Ionic project",
+  "scripts": {
+    "start": "mongod --port 5400 | node server.js"
+  },
+  "keywords": [
+    "animals",
+    "pets"
+  ],
   "dependencies": {
+    "bcrypt": "^0.8.5",
     "express": "^4.13.4",
     "gulp": "^3.5.6",
     "gulp-concat": "^2.2.0",
@@ -26,8 +34,5 @@
   ],
   "cordovaPlatforms": [
     "ios"
-  ],
-  "scripts": {
-    "start": "mongod --port 5400 | node server.js"
-  }
+  ]
 }
